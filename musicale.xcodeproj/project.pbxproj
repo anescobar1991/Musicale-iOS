@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4116C0E51AE216C4005FBCA2 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4116C0E41AE216C4005FBCA2 /* blink.jpg */; };
+		4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131C5CC1AE36C7200C76470 /* EventsViewController.swift */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
 		417091031AD9B89A0095A7BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417091011AD9B89A0095A7BB /* Main.storyboard */; };
 		417091051AD9B89A0095A7BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 417091041AD9B89A0095A7BB /* Images.xcassets */; };
 		417091141AD9B89A0095A7BB /* musicaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417091131AD9B89A0095A7BB /* musicaleTests.swift */; };
-		417FD7DE1ADCC72700D8CB7F /* EventListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7DD1ADCC72700D8CB7F /* EventListTableViewController.swift */; };
 		417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E01ADE0A5900D8CB7F /* Event.swift */; };
 		417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		4116C0E41AE216C4005FBCA2 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
+		4131C5CC1AE36C7200C76470 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417090FC1AD9B89A0095A7BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		417090FD1AD9B89A0095A7BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,7 +38,6 @@
 		4170910D1AD9B89A0095A7BB /* musicaleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = musicaleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		417091121AD9B89A0095A7BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		417091131AD9B89A0095A7BB /* musicaleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musicaleTests.swift; sourceTree = "<group>"; };
-		417FD7DD1ADCC72700D8CB7F /* EventListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListTableViewController.swift; sourceTree = "<group>"; };
 		417FD7E01ADE0A5900D8CB7F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,9 +85,9 @@
 				417090FD1AD9B89A0095A7BB /* AppDelegate.swift */,
 				417091011AD9B89A0095A7BB /* Main.storyboard */,
 				417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */,
-				417FD7DD1ADCC72700D8CB7F /* EventListTableViewController.swift */,
 				417091041AD9B89A0095A7BB /* Images.xcassets */,
 				417090FB1AD9B89A0095A7BB /* Supporting Files */,
+				4131C5CC1AE36C7200C76470 /* EventsViewController.swift */,
 			);
 			path = musicale;
 			sourceTree = "<group>";
@@ -228,9 +228,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */,
-				417FD7DE1ADCC72700D8CB7F /* EventListTableViewController.swift in Sources */,
 				417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */,
 				417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */,
+				4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
