@@ -15,6 +15,7 @@
 		417091141AD9B89A0095A7BB /* musicaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417091131AD9B89A0095A7BB /* musicaleTests.swift */; };
 		417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E01ADE0A5900D8CB7F /* Event.swift */; };
 		417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */; };
+		41C42E0D1AE4B55D00D5C537 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C42E0C1AE4B55D00D5C537 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		417091131AD9B89A0095A7BB /* musicaleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musicaleTests.swift; sourceTree = "<group>"; };
 		417FD7E01ADE0A5900D8CB7F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		41C42E0C1AE4B55D00D5C537 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41C42E0D1AE4B55D00D5C537 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		417090EF1AD9B89A0095A7BB = {
 			isa = PBXGroup;
 			children = (
+				41C42E0C1AE4B55D00D5C537 /* MapKit.framework */,
 				417090FA1AD9B89A0095A7BB /* musicale */,
 				417091101AD9B89A0095A7BB /* musicaleTests */,
 				417090F91AD9B89A0095A7BB /* Products */,
@@ -176,6 +180,11 @@
 					417090F71AD9B89A0095A7BB = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = 9J2NUDNM8U;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					4170910C1AD9B89A0095A7BB = {
 						CreatedOnToolsVersion = 6.3;

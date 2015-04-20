@@ -77,7 +77,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         messageLabel.textColor = UIColor.darkGrayColor()
         messageLabel.textAlignment = NSTextAlignment.Center
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
