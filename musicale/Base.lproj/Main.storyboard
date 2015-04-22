@@ -102,7 +102,14 @@
                             <constraint firstItem="LeS-XF-llN" firstAttribute="top" secondItem="Lkr-t1-BrJ" secondAttribute="bottom" id="zaK-C2-fje"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Events in the area" id="piv-4q-LJa"/>
+                    <navigationItem key="navigationItem" title="Music" id="piv-4q-LJa">
+                        <barButtonItem key="leftBarButtonItem" title="Categories" id="kzU-Wa-hex">
+                            <color key="tintColor" red="0.10196078431372549" green="0.13725490196078433" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="rD0-sU-z7k">
+                            <color key="tintColor" red="0.10196078431372549" green="0.13725490196078433" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Lkr-t1-BrJ" id="zYM-YG-Bwu"/>
                     </connections>

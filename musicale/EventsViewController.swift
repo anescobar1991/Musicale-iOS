@@ -27,7 +27,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func refreshData(sender:AnyObject) {
         events = [
             Event(title: "Blink-182", date: "July 4 2015", location: "Crescent Ballroom", imageUrl: "https://download.unsplash.com/photo-1427348693976-99e4aca06bb9"),
-            Event(title: "Drake", date: "July 5 2015", location: "Crescent Ballroom", imageUrl: "https://download.unsplash.com/photo-1427348693976-99e4aca06bb9"),
+            Event(title: "Another band", date: "July 5 2015", location: "Crescent Ballroom", imageUrl: "https://download.unsplash.com/photo-1427348693976-99e4aca06bb9"),
             Event(title: "Very long band name that will take lots of space", date: "July 8 2015", location: "Crescent Ballroom", imageUrl: "https://download.unsplash.com/photo-1427348693976-99e4aca06bb9"),
             Event(title: "GQ asdfjaslkfjaslkjf lkasjlfkj ;asjf;jasfjsa;jf ", date: "July 10 2015", location: "Crescent Ballroom lasdflkasjlfkj ", imageUrl: "https://download.unsplash.com/photo-1427348693976-99e4aca06bb9"),
             Event(title: "GQ asdfjaslkfjaslkjf lkasjlfkj ;asjf;jasfjsa;jf ", date: "July 10 2015", location: "Crescent Ballroom lasdflkasjlfkj ", imageUrl: "https://download.unsplash.com/photo-1427348693976-99e4aca06bb9"),
