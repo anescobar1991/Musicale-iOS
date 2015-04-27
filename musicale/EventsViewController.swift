@@ -56,7 +56,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return events.count
     }
     
@@ -66,7 +65,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         let entry = events[indexPath.row]
         
-                cell.titleLabel.text = entry.title
+        cell.titleLabel.text = entry.title
         cell.whenWhereLabel.text = "\(entry.date) @ \(entry.location)"
         
         return cell
@@ -115,7 +114,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.reloadData()
         }
     }
-
     
+    
+    @IBAction func cancelToEventsScreen(segue:UIStoryboardSegue) {
+    }
 
 }
