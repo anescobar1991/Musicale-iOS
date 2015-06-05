@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41128A8A1B1FDC0300366DFB /* LastFmDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A891B1FDC0300366DFB /* LastFmDataProvider.swift */; };
+		41128A8C1B1FE37700366DFB /* PersistentenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A8B1B1FE37700366DFB /* PersistentenceManager.swift */; };
+		41128A8E1B1FE7C400366DFB /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A8D1B1FE7C400366DFB /* LocationProvider.swift */; };
 		4116C0E51AE216C4005FBCA2 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4116C0E41AE216C4005FBCA2 /* blink.jpg */; };
 		4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131C5CC1AE36C7200C76470 /* EventsViewController.swift */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41128A891B1FDC0300366DFB /* LastFmDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFmDataProvider.swift; sourceTree = "<group>"; };
+		41128A8B1B1FE37700366DFB /* PersistentenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentenceManager.swift; sourceTree = "<group>"; };
+		41128A8D1B1FE7C400366DFB /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		4116C0E41AE216C4005FBCA2 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
 		4131C5CC1AE36C7200C76470 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +69,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41128A861B1FDA4F00366DFB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		41128A871B1FDABD00366DFB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4131C5CC1AE36C7200C76470 /* EventsViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		41128A881B1FDBEA00366DFB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				41128A891B1FDC0300366DFB /* LastFmDataProvider.swift */,
+				41128A8B1B1FE37700366DFB /* PersistentenceManager.swift */,
+				41128A8D1B1FE7C400366DFB /* LocationProvider.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		417090EF1AD9B89A0095A7BB = {
 			isa = PBXGroup;
 			children = (
@@ -85,13 +117,14 @@
 		417090FA1AD9B89A0095A7BB /* musicale */ = {
 			isa = PBXGroup;
 			children = (
+				41128A881B1FDBEA00366DFB /* API */,
+				41128A871B1FDABD00366DFB /* Controller */,
+				41128A861B1FDA4F00366DFB /* View */,
 				417FD7DF1ADE053D00D8CB7F /* Models */,
 				417090FD1AD9B89A0095A7BB /* AppDelegate.swift */,
 				417091011AD9B89A0095A7BB /* Main.storyboard */,
-				417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */,
 				417091041AD9B89A0095A7BB /* Images.xcassets */,
 				417090FB1AD9B89A0095A7BB /* Supporting Files */,
-				4131C5CC1AE36C7200C76470 /* EventsViewController.swift */,
 			);
 			path = musicale;
 			sourceTree = "<group>";
@@ -239,7 +272,10 @@
 				417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */,
 				417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */,
 				417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */,
+				41128A8C1B1FE37700366DFB /* PersistentenceManager.swift in Sources */,
+				41128A8A1B1FDC0300366DFB /* LastFmDataProvider.swift in Sources */,
 				4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */,
+				41128A8E1B1FE7C400366DFB /* LocationProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vmN-WG-TP4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vmN-WG-TP4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -94,8 +94,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="k0H-LO-i2t" id="Dww-oG-jVI"/>
-                                    <outlet property="delegate" destination="k0H-LO-i2t" id="5cv-Bi-kiL"/>
+                                    <outlet property="dataSource" destination="k0H-LO-i2t" id="olY-a9-Kvh"/>
+                                    <outlet property="delegate" destination="k0H-LO-i2t" id="oqJ-xY-7vg"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -115,7 +115,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Shows in the area" id="piv-4q-LJa"/>
                     <connections>
-                        <outlet property="tableView" destination="Lkr-t1-BrJ" id="zYM-YG-Bwu"/>
+                        <outlet property="eventsTableView" destination="Lkr-t1-BrJ" id="Uwh-f9-XHY"/>
+                        <outlet property="mapView" destination="WBA-V2-yrI" id="VN6-R7-DWt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXi-fu-C2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -199,13 +200,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h3Q-fB-31G" id="6do-X5-tUx">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Change location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zar-cU-cMn">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Change location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zar-cU-cMn">
                                                     <rect key="frame" x="8" y="18" width="551" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.1019607843" green="0.13725490200000001" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Phoenix, AZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-as-4T8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Phoenix, AZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-as-4T8">
                                                     <rect key="frame" x="8" y="43" width="551" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -273,11 +274,41 @@
                     <view key="view" contentMode="scaleToFill" id="NoZ-kB-qfU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="City, place, or address" translatesAutoresizingMaskIntoConstraints="NO" id="XP3-OG-4Xl">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="Yma-Vo-i14" id="JBT-Q8-8gG"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XP3-OG-4Xl" firstAttribute="leading" secondItem="NoZ-kB-qfU" secondAttribute="leading" id="WAB-lR-ARC"/>
+                            <constraint firstAttribute="trailing" secondItem="XP3-OG-4Xl" secondAttribute="trailing" id="cRA-8O-o4b"/>
+                            <constraint firstItem="XP3-OG-4Xl" firstAttribute="top" secondItem="hy5-4F-kdw" secondAttribute="bottom" id="o3r-uG-uod"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Change location" id="AKe-2f-SlB"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="qde-16-sBy" id="rqP-36-NoE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXs-sL-lV2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="qde-16-sBy">
+                    <connections>
+                        <outlet property="delegate" destination="Yma-Vo-i14" id="VBg-Wy-W4R"/>
+                        <outlet property="searchBar" destination="XP3-OG-4Xl" id="xjI-ie-pqL"/>
+                        <outlet property="searchContentsController" destination="Yma-Vo-i14" id="aRv-uE-7dd"/>
+                        <outlet property="searchResultsDataSource" destination="Yma-Vo-i14" id="5qx-5O-jka"/>
+                        <outlet property="searchResultsDelegate" destination="Yma-Vo-i14" id="T3y-dO-AhG"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="4544" y="1112"/>
         </scene>
