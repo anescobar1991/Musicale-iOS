@@ -8,7 +8,7 @@
         <!--Events in the area-->
         <scene sceneID="P5l-HE-cFy">
             <objects>
-                <viewController title="Events in the area" id="k0H-LO-i2t" customClass="EventsViewController" customModule="musicale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="events" title="Events in the area" modalPresentationStyle="currentContext" id="k0H-LO-i2t" customClass="EventsViewController" customModule="musicale" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2O8-jg-dSW"/>
                         <viewControllerLayoutGuide type="bottom" id="LeS-XF-llN"/>
@@ -126,7 +126,7 @@
         <!--Venues-->
         <scene sceneID="OCH-5e-6eu">
             <objects>
-                <viewController id="ZVe-Dm-bQl" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="ZVe-Dm-bQl" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wYq-aO-wsT"/>
                         <viewControllerLayoutGuide type="bottom" id="3Rf-Xt-nUF"/>
@@ -145,7 +145,7 @@
         <!--Artists-->
         <scene sceneID="grX-Md-n7Q">
             <objects>
-                <navigationController id="jus-WT-E9L" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="currentContext" id="jus-WT-E9L" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Artists" id="v1W-Tm-3M3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tuH-Fj-YN4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -166,7 +166,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uYd-d4-0uZ">
             <objects>
-                <navigationController id="DNj-Ro-ztK" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="currentContext" id="DNj-Ro-ztK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="more" id="FDe-nL-d0c"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e7Z-nK-dcM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -187,7 +187,7 @@
         <!--More-->
         <scene sceneID="XHt-ub-Ikp">
             <objects>
-                <tableViewController id="g9l-tM-JaV" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="currentContext" id="g9l-tM-JaV" customClass="MoreOptionsTableViewController" customModule="musicale" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="p0Z-fg-lAd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,7 +206,7 @@
                                                     <color key="textColor" red="0.1019607843" green="0.13725490200000001" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Phoenix, AZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-as-4T8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-as-4T8">
                                                     <rect key="frame" x="8" y="43" width="551" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -225,7 +225,7 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="zfN-Ru-cET" kind="show" id="cf6-Iu-7Kj"/>
+                                            <segue destination="hxQ-ZT-L87" kind="show" id="AuV-Pl-YWi"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="0.0" id="dxm-Ut-vZK">
@@ -258,64 +258,62 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="More" id="XPX-bF-uS6"/>
+                    <connections>
+                        <outlet property="searchLocation" destination="zJ9-as-4T8" id="HBS-fc-RRE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YX9-U8-tOB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2913" y="1112"/>
         </scene>
         <!--Change location-->
-        <scene sceneID="uYU-HZ-WLc">
+        <scene sceneID="I9e-qr-kdE">
             <objects>
-                <viewController id="Yma-Vo-i14" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hy5-4F-kdw"/>
-                        <viewControllerLayoutGuide type="bottom" id="VTh-zg-57n"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NoZ-kB-qfU">
+                <tableViewController title="Change location" modalPresentationStyle="currentContext" id="WN6-Fi-7ss" customClass="LocationChangeTableViewController" customModule="musicale" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OkV-iQ-gbF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" placeholder="City, place, or address" translatesAutoresizingMaskIntoConstraints="NO" id="XP3-OG-4Xl">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                                <connections>
-                                    <outlet property="delegate" destination="Yma-Vo-i14" id="JBT-Q8-8gG"/>
-                                </connections>
-                            </searchBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="XP3-OG-4Xl" firstAttribute="leading" secondItem="NoZ-kB-qfU" secondAttribute="leading" id="WAB-lR-ARC"/>
-                            <constraint firstAttribute="trailing" secondItem="XP3-OG-4Xl" secondAttribute="trailing" id="cRA-8O-o4b"/>
-                            <constraint firstItem="XP3-OG-4Xl" firstAttribute="top" secondItem="hy5-4F-kdw" secondAttribute="bottom" id="o3r-uG-uod"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Change location" id="AKe-2f-SlB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="City, place or address" id="Ele-OG-V10">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationResultCell" id="wkB-r4-7U5">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wkB-r4-7U5" id="d2v-1W-fLU">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="q2l-Wh-0YW" kind="unwind" unwindAction="unwindToEventsView:" id="rOR-F7-BWi"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WN6-Fi-7ss" id="elu-3c-TVT"/>
+                            <outlet property="delegate" destination="WN6-Fi-7ss" id="R2I-ai-k6y"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Change location" id="xXw-tn-udz"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="qde-16-sBy" id="rqP-36-NoE"/>
+                        <outlet property="locationsTableView" destination="OkV-iQ-gbF" id="AoN-cK-95i"/>
+                        <outlet property="searchBar" destination="Ele-OG-V10" id="nMc-aC-cJd"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nXs-sL-lV2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="qde-16-sBy">
-                    <connections>
-                        <outlet property="delegate" destination="Yma-Vo-i14" id="VBg-Wy-W4R"/>
-                        <outlet property="searchBar" destination="XP3-OG-4Xl" id="xjI-ie-pqL"/>
-                        <outlet property="searchContentsController" destination="Yma-Vo-i14" id="aRv-uE-7dd"/>
-                        <outlet property="searchResultsDataSource" destination="Yma-Vo-i14" id="5qx-5O-jka"/>
-                        <outlet property="searchResultsDelegate" destination="Yma-Vo-i14" id="T3y-dO-AhG"/>
-                    </connections>
-                </searchDisplayController>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qdh-GN-23E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="q2l-Wh-0YW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4544" y="1112"/>
+            <point key="canvasLocation" x="4795" y="1112"/>
         </scene>
         <!--Artists-->
         <scene sceneID="ZuC-cq-QpS">
             <objects>
-                <viewController id="k9f-Mc-bbt" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="k9f-Mc-bbt" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GaI-jM-Um5"/>
                         <viewControllerLayoutGuide type="bottom" id="eau-Us-Rhc"/>
@@ -334,7 +332,7 @@
         <!--Events-->
         <scene sceneID="mPs-J2-u3Z">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kf9-MU-oGI" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" id="Kf9-MU-oGI" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="Q6a-OT-B6J"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WUI-Oj-8cz">
@@ -357,7 +355,7 @@
         <!--Venues-->
         <scene sceneID="PPk-gn-JRD">
             <objects>
-                <navigationController id="yJ6-VP-wmt" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="currentContext" id="yJ6-VP-wmt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Venues" id="s5c-4E-hqg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHl-Zv-a1f">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -378,7 +376,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ZNT-x3-N5Q">
             <objects>
-                <tabBarController id="vmN-WG-TP4" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="currentContext" id="vmN-WG-TP4" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5ik-zX-acj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -403,27 +401,22 @@
             <point key="canvasLocation" x="906" y="-726"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="DJA-3y-Kdb">
+        <scene sceneID="CZI-O4-Muq">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zfN-Ru-cET" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" id="hxQ-ZT-L87" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KPM-h2-hHf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YdM-R7-UJp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.1019607843" green="0.13725490200000001" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Yma-Vo-i14" kind="relationship" relationship="rootViewController" id="hFa-qI-rJm"/>
+                        <segue destination="WN6-Fi-7ss" kind="relationship" relationship="rootViewController" id="VLO-5l-mQm"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ebz-GB-X0K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPe-cf-Cff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3732" y="1112"/>
+            <point key="canvasLocation" x="3863" y="1112"/>
         </scene>
     </scenes>
     <resources>
