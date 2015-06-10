@@ -11,6 +11,7 @@
 		41128A8C1B1FE37700366DFB /* PersistentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A8B1B1FE37700366DFB /* PersistentDataManager.swift */; };
 		41128A921B22A37800366DFB /* LocationChangeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A911B22A37800366DFB /* LocationChangeTableViewController.swift */; };
 		41128A941B236CE900366DFB /* MoreOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A931B236CE900366DFB /* MoreOptionsTableViewController.swift */; };
+		41128A9A1B27F20300366DFB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 41128A991B27F20300366DFB /* .gitignore */; };
 		4116C0E51AE216C4005FBCA2 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4116C0E41AE216C4005FBCA2 /* blink.jpg */; };
 		4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131C5CC1AE36C7200C76470 /* EventsViewController.swift */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		41128A8B1B1FE37700366DFB /* PersistentDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentDataManager.swift; sourceTree = "<group>"; };
 		41128A911B22A37800366DFB /* LocationChangeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationChangeTableViewController.swift; sourceTree = "<group>"; };
 		41128A931B236CE900366DFB /* MoreOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsTableViewController.swift; sourceTree = "<group>"; };
+		41128A991B27F20300366DFB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4116C0E41AE216C4005FBCA2 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
 		4131C5CC1AE36C7200C76470 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +130,7 @@
 				417091011AD9B89A0095A7BB /* Main.storyboard */,
 				417091041AD9B89A0095A7BB /* Images.xcassets */,
 				417090FB1AD9B89A0095A7BB /* Supporting Files */,
+				41128A991B27F20300366DFB /* .gitignore */,
 			);
 			path = musicale;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41128A9A1B27F20300366DFB /* .gitignore in Resources */,
 				417091031AD9B89A0095A7BB /* Main.storyboard in Resources */,
 				417091051AD9B89A0095A7BB /* Images.xcassets in Resources */,
 				4116C0E51AE216C4005FBCA2 /* blink.jpg in Resources */,

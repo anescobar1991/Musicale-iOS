@@ -15,34 +15,55 @@ class MoreOptionsTableViewController: UITableViewController {
 
   @IBOutlet weak var searchLocation: UILabel!
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    loadSearchLocationLabel()
+  }
+  
+  @IBAction func unwindToMoreView(sender: UIStoryboardSegue) {
+    loadSearchLocationLabel()
+  }
+  
+  private func loadSearchLocationLabel() {
     if let place = persistentData.searchPlace {
-      searchLocation.text = "\(place.locality), \(place.country)"
-
+      searchLocation.text = sanitizePlaceToDisplay(place)
     } else {
-        let location = persistentData.searchLocation
-        
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void
+      let location = persistentData.searchLocation
+      
+      CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void
         in
         
-          if error != nil {
-            //TODO: do something here if error...
-              return
-          }
-          
-          if placemarks.count > 0 {
-            let place = placemarks[0] as! CLPlacemark
-            self.persistentData.searchPlace = place
-            self.searchLocation.text = "\(place.locality), \(place.country)"
-          }
-          else {
-            //TODO: do something here if error...
-          }
+        if error != nil {
+          //TODO: do something here if error...
+          return
+        }
+        
+        if placemarks.count > 0 {
+          let place = placemarks[0] as! CLPlacemark
+          self.persistentData.searchPlace = place
+          self.searchLocation.text = self.sanitizePlaceToDisplay(place)
+        }
+        else {
+          //TODO: do something here if error...
+        }
       })
     }
   }
+  
+  private func sanitizePlaceToDisplay(place: CLPlacemark) -> String {
+    var placeStringArray :[String] = []
+    
+    if let name = place.name { placeStringArray.append("\(name) -") }
+    if let locality = place.locality { placeStringArray.append("\(locality),") }
+    
+    placeStringArray.append(place.country)
+    
+    let sanitizedPlaceString = " ".join(placeStringArray)
+    
+    return sanitizedPlaceString
+  }
+
 
   // MARK: - Table view data source
 

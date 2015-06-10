@@ -77,8 +77,16 @@ extension LocationChangeTableViewController : UITableViewDataSource {
   }
   
   private func sanitizePlaceToDisplay(place: CLPlacemark) -> String {
-    return "\(place.locality), \(place.country)"
-    //TODO handle logic to make sure nil is never displayed but correct names of placess and addresses are
+    var placeStringArray :[String] = []
+    
+    if let name = place.name { placeStringArray.append("\(name) -") }
+    if let locality = place.locality { placeStringArray.append("\(locality),") }
+    
+    placeStringArray.append(place.country)
+    
+    let sanitizedPlaceString = " ".join(placeStringArray)
+
+    return sanitizedPlaceString
   }
   
 }
@@ -90,8 +98,6 @@ extension LocationChangeTableViewController: UITableViewDelegate {
     
     dataManager.searchLocation = places[indexPath.row].location
     dataManager.searchPlace = places[indexPath.row]
-    
-    //TODO upon item being selected should store this items latlng and placeMark in persistentData and return to whatever tab user was on
   }
   
 }

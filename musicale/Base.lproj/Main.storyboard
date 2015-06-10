@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="1938" y="-726"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--More-->
         <scene sceneID="uYd-d4-0uZ">
             <objects>
-                <navigationController modalPresentationStyle="currentContext" id="DNj-Ro-ztK" sceneMemberID="viewController">
+                <navigationController title="More" modalPresentationStyle="currentContext" id="DNj-Ro-ztK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="more" id="FDe-nL-d0c"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e7Z-nK-dcM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -206,7 +206,7 @@
                                                     <color key="textColor" red="0.1019607843" green="0.13725490200000001" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-as-4T8">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-as-4T8">
                                                     <rect key="frame" x="8" y="43" width="551" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -284,13 +284,21 @@
                             </scopeButtonTitles>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationResultCell" id="wkB-r4-7U5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationResultCell" textLabel="A2G-k1-tM5" style="IBUITableViewCellStyleDefault" id="wkB-r4-7U5">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wkB-r4-7U5" id="d2v-1W-fLU">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="A2G-k1-tM5">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="q2l-Wh-0YW" kind="unwind" unwindAction="unwindToEventsView:" id="rOR-F7-BWi"/>
+                                    <segue destination="q2l-Wh-0YW" kind="unwind" unwindAction="unwindToMoreView:" id="nNa-SY-LF7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

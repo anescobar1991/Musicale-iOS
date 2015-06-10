@@ -17,7 +17,7 @@ class EventsViewController: UIViewController {
   private var messageLabel = UILabel()
   private var refreshControl = UIRefreshControl()
   private var locationManager = CLLocationManager()
-  private var lastFmDataProvider :LastFmDataProvider!
+  private var lastFmDataProvider :LastFmDataProvider = LastFmDataProvider()
   private var dataManager: PersistentDataManager = PersistentDataManager.sharedInstance
   
   @IBOutlet weak var mapView: MKMapView!
@@ -26,10 +26,14 @@ class EventsViewController: UIViewController {
   override func viewDidLoad() {
       
     super.viewDidLoad()
-    lastFmDataProvider = LastFmDataProvider()
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
     determineLocationServicesAuthorization(CLLocationManager.authorizationStatus())
     configureTableView()
   }
@@ -109,9 +113,6 @@ class EventsViewController: UIViewController {
           self.presentViewController(alertController, animated: true, completion: nil)
         }
       }
-  }
-  
-  @IBAction func unwindToEventsView(sender: UIStoryboardSegue) {
   }
 
 }
