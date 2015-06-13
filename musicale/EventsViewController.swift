@@ -168,7 +168,7 @@ extension EventsViewController: CLLocationManagerDelegate {
     didUpdateLocations locations: [AnyObject]!) {
       locationManager.stopUpdatingLocation()
 
-      var latestLocation = locations[locations.count - 1] as! CLLocation
+      let latestLocation = locations[locations.count - 1] as! CLLocation
       
       dataManager.searchLocation = latestLocation
       centerMapOnLocation(latestLocation)

@@ -28,8 +28,8 @@ class LocationChangeTableViewController: UITableViewController {
 extension LocationChangeTableViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-    self.places.removeAll(keepCapacity: false)
-    self.locationsTableView.reloadData()
+    places.removeAll(keepCapacity: false)
+    locationsTableView.reloadData()
 
     let geoCoder = CLGeocoder()
     
