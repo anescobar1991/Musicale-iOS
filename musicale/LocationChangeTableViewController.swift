@@ -9,10 +9,10 @@
 import UIKit
 import CoreLocation
 
-class LocationChangeTableViewController: UITableViewController {
+class LocationChangeTableViewController: UIViewController {
   
-  @IBOutlet var locationsTableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
+  @IBOutlet weak var locationsTableView: UITableView!
   
   private var places: [CLPlacemark] = []
   
@@ -59,15 +59,15 @@ extension LocationChangeTableViewController: UISearchBarDelegate {
 // MARK: - UITableViewDataSource
 extension LocationChangeTableViewController : UITableViewDataSource {
   
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return places.count
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCellWithIdentifier("locationResultCell", forIndexPath: indexPath) as! UITableViewCell
     
@@ -93,7 +93,7 @@ extension LocationChangeTableViewController : UITableViewDataSource {
 
 extension LocationChangeTableViewController: UITableViewDelegate {
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let dataManager = PersistentDataManager.sharedInstance
     
     dataManager.searchLocation = places[indexPath.row].location

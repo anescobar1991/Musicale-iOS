@@ -16,6 +16,9 @@ class EventTableViewCell: UITableViewCell {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+    
+    eventImage.layer.cornerRadius = 33.0
+    eventImage.clipsToBounds = true
   }
 
   override func setSelected(selected: Bool, animated: Bool) {
