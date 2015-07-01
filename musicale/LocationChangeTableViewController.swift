@@ -14,6 +14,9 @@ class LocationChangeTableViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var locationsTableView: UITableView!
   
+  private var messageLabel = UILabel()
+  private var progressBar = UIActivityIndicatorView()
+  
   private var locationManager = CLLocationManager()
   private var dataManager = PersistentDataManager.sharedInstance
 
@@ -26,6 +29,14 @@ class LocationChangeTableViewController: UIViewController {
     locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
     
     searchBar.delegate = self
+    
+    configureMessageLabel()
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    searchBar.becomeFirstResponder()
   }
   
   private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
@@ -64,7 +75,38 @@ class LocationChangeTableViewController: UIViewController {
   
   @IBAction func onUseCurrentLocationTouchDown(sender: AnyObject) {
     let button = sender as! UIButton
-    button.backgroundColor = UIColor.lightGrayColor()
+    button.backgroundColor = UIColor.groupTableViewBackgroundColor()
+  }
+  
+  @IBAction func onUseCurrentLocationTouchDragOutside(sender: AnyObject) {
+    
+    let button = sender as! UIButton
+    button.backgroundColor = UIColor.whiteColor()
+  }
+  
+  private func configureTableViewAesthetics() {
+    locationsTableView.backgroundView = nil
+    if (places.count < 2) {
+      locationsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    } else {
+      locationsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+    }
+  }
+  
+  private func configureMessageLabel() {
+    messageLabel.numberOfLines = 0;
+    messageLabel.textColor = UIColor.darkGrayColor()
+    messageLabel.textAlignment = NSTextAlignment.Center
+  }
+  
+  private func setTableViewMessageLabel(message: String) {
+    //TODO: this method
+    messageLabel.text = message
+    locationsTableView.backgroundView = messageLabel
+  }
+  
+  private func displayProgressBar(display: Bool) {
+    //TODO: this method
   }
   
 }
@@ -74,7 +116,10 @@ extension LocationChangeTableViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     places.removeAll(keepCapacity: false)
+    configureTableViewAesthetics()
     locationsTableView.reloadData()
+    
+    displayProgressBar(true)
 
     let geoCoder = CLGeocoder()
     
@@ -84,16 +129,18 @@ extension LocationChangeTableViewController: UISearchBarDelegate {
     geoCoder.geocodeAddressString(addressString, completionHandler:
       {(placemarks: [AnyObject]!, error: NSError!) in
         
+        self.displayProgressBar(false)
+
         if error != nil {
-          //TODO: do something here if error...
+          self.setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
         } else {
           if placemarks.count > 0 {
             let placeResults = placemarks as! [CLPlacemark]
-            placeResults[0].location
             self.places.extend(placeResults)
+            self.configureTableViewAesthetics()
             self.locationsTableView.reloadData()
           } else {
-            //TODO: what to do if no results come back...
+            self.setTableViewMessageLabel("No results found for your search")
           }
         }
     })
@@ -141,11 +188,7 @@ extension LocationChangeTableViewController: UITableViewDelegate {
 
 // MARK: - CLLocationManagerDelegate
 extension LocationChangeTableViewController: CLLocationManagerDelegate {
-//  func locationManager(manager: CLLocationManager!,
-//    didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-//      
-//      determineLocationServicesAuthorization(status)
-//  }
+
   
   func locationManager(manager: CLLocationManager!,
     didUpdateLocations locations: [AnyObject]!) {

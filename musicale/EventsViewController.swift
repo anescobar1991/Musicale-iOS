@@ -52,8 +52,6 @@ class EventsViewController: UIViewController {
     refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
     eventsTableView.addSubview(refreshControl)
     
-    automaticallyAdjustsScrollViewInsets = false;
-
     eventsTableView.rowHeight = UITableViewAutomaticDimension
     eventsTableView.estimatedRowHeight = 100.0
   }

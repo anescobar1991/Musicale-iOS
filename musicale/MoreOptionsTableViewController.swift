@@ -56,8 +56,7 @@ class MoreOptionsTableViewController: UITableViewController {
     
     if let name = place.name { placeStringArray.append("\(name) -") }
     if let locality = place.locality { placeStringArray.append("\(locality),") }
-    
-    placeStringArray.append(place.country)
+    if let country = place.country { placeStringArray.append("\(country),") }
     
     let sanitizedPlaceString = " ".join(placeStringArray)
     
