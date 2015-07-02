@@ -13,30 +13,66 @@ class LocationChangeTableViewController: UIViewController {
   
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var locationsTableView: UITableView!
+  @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
   
   private var messageLabel = UILabel()
-  private var progressBar = UIActivityIndicatorView()
+  private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   
   private var locationManager = CLLocationManager()
   private var dataManager = PersistentDataManager.sharedInstance
 
   private var places: [CLPlacemark] = []
   
+  private var keyboardHeight: CGFloat!
+
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
     
     searchBar.delegate = self
     
-    configureMessageLabel()
+    configureUIPieces()
   }
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
     searchBar.becomeFirstResponder()
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
+  func keyboardWillShow(notification: NSNotification) {
+    if let userInfo = notification.userInfo {
+      if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        keyboardHeight = keyboardSize.height
+        animateTableViewUp(true)
+      }
+    }
+  }
+  
+  func keyboardWillHide(notification: NSNotification) {
+    self.animateTableViewUp(false)
+  }
+  
+  
+  private func animateTableViewUp(up: Bool) {
+    let movement = (up ? keyboardHeight : -keyboardHeight)
+    
+    UIView.animateWithDuration(0.3, animations: {
+      self.tableViewBottomConstraint.constant += movement
+      self.view.layoutIfNeeded()
+    })
   }
   
   private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
@@ -49,7 +85,7 @@ class LocationChangeTableViewController: UIViewController {
       case .Restricted, .Denied:
         let alertController = UIAlertController(
           title: "Location Access Disabled",
-          message: "In order to get events near you we need to know where you are silly! Please open this app's settings and set location access to 'While Using the App'.",
+          message: "In order to get your current location you must allow us to do so. Please open Musicale's settings and set location access to 'While Using the App'.",
           preferredStyle: .Alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -93,20 +129,27 @@ class LocationChangeTableViewController: UIViewController {
     }
   }
   
-  private func configureMessageLabel() {
+  private func configureUIPieces() {
     messageLabel.numberOfLines = 0;
     messageLabel.textColor = UIColor.darkGrayColor()
     messageLabel.textAlignment = NSTextAlignment.Center
+    progressBar.center = locationsTableView.center
+    progressBar.hidesWhenStopped = true
   }
   
   private func setTableViewMessageLabel(message: String) {
-    //TODO: this method
     messageLabel.text = message
     locationsTableView.backgroundView = messageLabel
   }
   
   private func displayProgressBar(display: Bool) {
-    //TODO: this method
+    if (display) {
+      locationsTableView.backgroundView = progressBar
+      progressBar.startAnimating()
+    } else {
+      locationsTableView.backgroundView = nil
+      progressBar.stopAnimating()
+    }
   }
   
 }
@@ -132,15 +175,17 @@ extension LocationChangeTableViewController: UISearchBarDelegate {
         self.displayProgressBar(false)
 
         if error != nil {
-          self.setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
+          if (error.code == 8) {
+            self.setTableViewMessageLabel("No locations found for your search")
+          } else {
+            self.setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
+          }
         } else {
           if placemarks.count > 0 {
             let placeResults = placemarks as! [CLPlacemark]
             self.places.extend(placeResults)
             self.configureTableViewAesthetics()
             self.locationsTableView.reloadData()
-          } else {
-            self.setTableViewMessageLabel("No results found for your search")
           }
         }
     })
@@ -167,7 +212,7 @@ extension LocationChangeTableViewController : UITableViewDataSource {
     
     cell.textLabel?.text = place.name
     if let locality = place.locality {
-      cell.detailTextLabel?.text = "\(place.locality), \(place.administrativeArea) \(place.country)"
+      cell.detailTextLabel?.text = "\(locality), \(place.administrativeArea) \(place.country)"
     } else {
       cell.detailTextLabel?.text = "\(place.administrativeArea) \(place.country)"
     }

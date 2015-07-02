@@ -95,7 +95,7 @@ class EventsViewController: UIViewController {
         case .Restricted, .Denied:
           let alertController = UIAlertController(
             title: "Location Access Disabled",
-            message: "In order to get events near you we need to know where you are silly! Please open this app's settings and set location access to 'While Using the App'.",
+            message: "In order to get events near you we need to know where you are! Please open this Musicale's settings and set location access to 'While Using the App'.",
             preferredStyle: .Alert)
           
           let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
