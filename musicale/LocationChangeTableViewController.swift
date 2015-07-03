@@ -85,7 +85,7 @@ class LocationChangeTableViewController: UIViewController {
       case .Restricted, .Denied:
         let alertController = UIAlertController(
           title: "Location Access Disabled",
-          message: "In order to get your current location you must allow us to do so. Please open Musicale's settings and set location access to 'While Using the App'.",
+          message: "Can't get your location without your permission. Open Musicale's settings and set location access to 'While Using the App.'",
           preferredStyle: .Alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -178,7 +178,7 @@ extension LocationChangeTableViewController: UISearchBarDelegate {
           let errorCode = error.code
           
           if (errorCode == CLError.GeocodeFoundNoResult.rawValue || errorCode == CLError.GeocodeFoundPartialResult.rawValue) {
-            self.setTableViewMessageLabel("No locations found for your search. Did you ")
+            self.setTableViewMessageLabel("No locations found for your search.")
           } else if (errorCode == CLError.Network.rawValue) {
             self.setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
           } else {

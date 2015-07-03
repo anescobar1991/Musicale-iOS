@@ -60,7 +60,7 @@ class EventsViewController: UIViewController {
   
   private func loadTableWithEvents() {
     if (events.isEmpty) {
-        messageLabel.text = "There are no events in this area. Maybe search elsewhere?"
+        messageLabel.text = "Bummer! There are no events in this area. Try searching elsewhere."
         eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         eventsTableView.backgroundView = messageLabel;
     } else {
@@ -106,7 +106,7 @@ class EventsViewController: UIViewController {
         case .Restricted, .Denied:
           let alertController = UIAlertController(
             title: "Location Access Disabled",
-            message: "In order to get events near you we need to know where you are! Please open this Musicale's settings and set location access to 'While Using the App'.",
+            message: "To get events near you we need to know where you are! Open Musicale's settings and set location access to 'While Using the App.'",
             preferredStyle: .Alert)
           
           let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
