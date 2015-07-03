@@ -175,8 +175,12 @@ extension LocationChangeTableViewController: UISearchBarDelegate {
         self.displayProgressBar(false)
 
         if error != nil {
-          if (error.code == 8) {
-            self.setTableViewMessageLabel("No locations found for your search")
+          let errorCode = error.code
+          
+          if (errorCode == CLError.GeocodeFoundNoResult.rawValue || errorCode == CLError.GeocodeFoundPartialResult.rawValue) {
+            self.setTableViewMessageLabel("No locations found for your search. Did you ")
+          } else if (errorCode == CLError.Network.rawValue) {
+            self.setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
           } else {
             self.setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
           }
