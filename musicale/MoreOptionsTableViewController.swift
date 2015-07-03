@@ -35,7 +35,7 @@ class MoreOptionsTableViewController: UITableViewController {
         in
         
         if error != nil {
-          //TODO: do something here if error...
+          self.searchLocation.text = ""
           return
         }
         
@@ -43,9 +43,6 @@ class MoreOptionsTableViewController: UITableViewController {
           let place = placemarks[0] as! CLPlacemark
           self.persistentData.searchPlace = place
           self.searchLocation.text = self.sanitizePlaceToDisplay(place)
-        }
-        else {
-          //TODO: do something here if error...
         }
       })
     }

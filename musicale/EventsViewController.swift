@@ -17,8 +17,8 @@ class EventsViewController: UIViewController {
   private var messageLabel = UILabel()
   private var refreshControl = UIRefreshControl()
   private var locationManager = CLLocationManager()
-  private var lastFmDataProvider :LastFmDataProvider = LastFmDataProvider()
-  private var dataManager: PersistentDataManager = PersistentDataManager.sharedInstance
+  private var lastFmDataProvider :LastFmDataProvider!
+  private var dataManager = PersistentDataManager.sharedInstance
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var eventsTableView: UITableView!
@@ -27,15 +27,17 @@ class EventsViewController: UIViewController {
       
     super.viewDidLoad()
     
+    lastFmDataProvider = LastFmDataProvider(delegate: self)
     locationManager.delegate = self
+    locationManager.distanceFilter = 10000
     locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    configureTableView()
   }
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
     determineLocationServicesAuthorization(CLLocationManager.authorizationStatus())
-    configureTableView()
   }
   
   func refreshData(sender:AnyObject) {
@@ -66,26 +68,33 @@ class EventsViewController: UIViewController {
     } else {
         eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         eventsTableView.backgroundView = nil
-        eventsTableView.reloadData()
     }
+    
+    eventsTableView.reloadData()
   }
   
-  private func centerMapOnLocation(location: CLLocation) {
+  private func loadMapWithEvents() {
+    //TODO add pins here using library https://github.com/ribl/FBAnnotationClusteringSwift
+  }
+  
+  private func setMapCenterCoordinates(location: CLLocation) {
     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
         regionRadius, regionRadius)
+    
     mapView.setRegion(coordinateRegion, animated: true)
   }
   
   private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
     
       if let searchLocation = dataManager.searchLocation {
-        centerMapOnLocation(searchLocation)
+        setMapCenterCoordinates(searchLocation)
         loadTableWithEvents()
+        loadMapWithEvents()
       } else {
         switch status {
         case .AuthorizedWhenInUse, .AuthorizedAlways:
           if let searchLocation = dataManager.searchLocation {
-            centerMapOnLocation(searchLocation)
+            setMapCenterCoordinates(searchLocation)
             loadTableWithEvents()
           } else {
             locationManager.startUpdatingLocation()
@@ -125,7 +134,7 @@ extension EventsViewController: UITableViewDataSource {
     
     cell.titleLabel.text = entry.title
     cell.whenWhereLabel.text = "\(entry.date) @ \(entry.location)"
-    
+    //TODO: download image here using https://github.com/onevcat/Kingfisher
     return cell
   }
   
@@ -165,12 +174,27 @@ extension EventsViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager!,
     didUpdateLocations locations: [AnyObject]!) {
       locationManager.stopUpdatingLocation()
-
       let latestLocation = locations[locations.count - 1] as! CLLocation
       
       dataManager.searchLocation = latestLocation
-      centerMapOnLocation(latestLocation)
+      setMapCenterCoordinates(latestLocation)
       loadTableWithEvents()
+  }
+  
+}
+
+// MARK: - LastFMDataProviderDelegate
+extension EventsViewController: LastFMDataProviderDelegate {
+  
+  func aboutToGetEvents() {
+    //TODO: start spinner here
+    println("about to start getting events")
+  }
+  
+  func didGetEvents() {
+    //TODO: stop spinner here
+    println("finished getting events")
+
   }
   
 }
