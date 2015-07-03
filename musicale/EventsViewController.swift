@@ -59,8 +59,6 @@ class EventsViewController: UIViewController {
   }
   
   private func loadTableWithEvents() {
-    events = lastFmDataProvider.getEvents()
-        
     if (events.isEmpty) {
         messageLabel.text = "There are no events in this area. Maybe search elsewhere?"
         eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -87,6 +85,10 @@ class EventsViewController: UIViewController {
   private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
     
       if let searchLocation = dataManager.searchLocation {
+        if (!dataManager.getEvents().isEmpty) {
+          events = lastFmDataProvider.getEvents()
+        }
+        
         setMapCenterCoordinates(searchLocation)
         loadTableWithEvents()
         loadMapWithEvents()

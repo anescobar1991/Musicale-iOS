@@ -231,6 +231,8 @@ extension LocationChangeTableViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     dataManager.searchLocation = places[indexPath.row].location
     dataManager.searchPlace = places[indexPath.row]
+    
+    dataManager.clearEvents()
   }
   
 }
@@ -247,6 +249,7 @@ extension LocationChangeTableViewController: CLLocationManagerDelegate {
       
       dataManager.searchLocation = latestLocation
       dataManager.searchPlace = nil
+      dataManager.clearEvents()
       performSegueWithIdentifier("unwindToMoreView", sender: nil)
   }
   
