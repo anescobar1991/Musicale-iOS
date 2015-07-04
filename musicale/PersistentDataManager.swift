@@ -13,7 +13,7 @@ class PersistentDataManager {
   var searchPlace :CLPlacemark?
   var searchLocation :CLLocation?
   private var events : [Event] = []
-    
+      
   static let sharedInstance = PersistentDataManager()
   
   func getEvents() -> [Event] {
@@ -27,4 +27,5 @@ class PersistentDataManager {
   func clearEvents() {
     self.events = []
   }
+  
 }

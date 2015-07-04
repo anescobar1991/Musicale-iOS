@@ -13,7 +13,7 @@
 		41128A941B236CE900366DFB /* MoreOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41128A931B236CE900366DFB /* MoreOptionsTableViewController.swift */; };
 		41128A9A1B27F20300366DFB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 41128A991B27F20300366DFB /* .gitignore */; };
 		4116C0E51AE216C4005FBCA2 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4116C0E41AE216C4005FBCA2 /* blink.jpg */; };
-		4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131C5CC1AE36C7200C76470 /* EventsViewController.swift */; };
+		412CEB121B478D7600CEE159 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB111B478D7600CEE159 /* EventsViewController.swift */; };
 		415666981B40EFF300C102CB /* define_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 415666971B40EFF300C102CB /* define_location.png */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
 		417091031AD9B89A0095A7BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417091011AD9B89A0095A7BB /* Main.storyboard */; };
@@ -42,7 +42,7 @@
 		41128A931B236CE900366DFB /* MoreOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsTableViewController.swift; sourceTree = "<group>"; };
 		41128A991B27F20300366DFB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4116C0E41AE216C4005FBCA2 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
-		4131C5CC1AE36C7200C76470 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		412CEB111B478D7600CEE159 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		415666971B40EFF300C102CB /* define_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = define_location.png; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417090FC1AD9B89A0095A7BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		41128A871B1FDABD00366DFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				412CEB111B478D7600CEE159 /* EventsViewController.swift */,
 				41128A911B22A37800366DFB /* LocationChangeTableViewController.swift */,
-				4131C5CC1AE36C7200C76470 /* EventsViewController.swift */,
 				41128A931B236CE900366DFB /* MoreOptionsTableViewController.swift */,
 			);
 			name = Controllers;
@@ -356,13 +356,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				41128A921B22A37800366DFB /* LocationChangeTableViewController.swift in Sources */,
+				412CEB121B478D7600CEE159 /* EventsViewController.swift in Sources */,
 				417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */,
 				417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */,
 				417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */,
 				41128A8C1B1FE37700366DFB /* PersistentDataManager.swift in Sources */,
 				41128A941B236CE900366DFB /* MoreOptionsTableViewController.swift in Sources */,
 				41128A8A1B1FDC0300366DFB /* LastFmDataProvider.swift in Sources */,
-				4131C5CD1AE36C7200C76470 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

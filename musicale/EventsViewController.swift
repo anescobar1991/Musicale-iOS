@@ -12,8 +12,6 @@ import MapKit
 
 class EventsViewController: UIViewController {
   
-  private let regionRadius: CLLocationDistance = 40000
-  private var events: [Event] = []
   private var messageLabel = UILabel()
   private var refreshControl = UIRefreshControl()
   private var locationManager = CLLocationManager()
@@ -29,8 +27,8 @@ class EventsViewController: UIViewController {
     
     lastFmDataProvider = LastFmDataProvider(delegate: self)
     locationManager.delegate = self
-    locationManager.distanceFilter = 10000
-    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    locationManager.distanceFilter = 1000000000
+    locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     configureTableView()
   }
   
@@ -41,8 +39,11 @@ class EventsViewController: UIViewController {
   }
   
   func refreshData(sender:AnyObject) {
-    loadTableWithEvents()
-    
+    if let location = dataManager.searchLocation {
+      lastFmDataProvider.getEvents(location.coordinate)
+    } else {
+      setTableViewMessageLabel("Can't get your location. Do you have airplane mode on?")
+    }
     refreshControl.endRefreshing()
   }
   
@@ -58,24 +59,28 @@ class EventsViewController: UIViewController {
     eventsTableView.estimatedRowHeight = 100.0
   }
   
-  private func loadTableWithEvents() {
-    if (events.isEmpty) {
-        messageLabel.text = "Bummer! There are no shows in this area. Try searching elsewhere."
-        eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        eventsTableView.backgroundView = messageLabel;
-    } else {
-        eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-        eventsTableView.backgroundView = nil
-    }
-    
-    eventsTableView.reloadData()
+  private func setTableViewMessageLabel(message: String) {
+    eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    messageLabel.text = message
+    eventsTableView.backgroundView = messageLabel
   }
   
-  private func loadMapWithEvents() {
+  private func loadEventsToView() {
+    if (dataManager.getEvents().isEmpty) {
+      setTableViewMessageLabel("Bummer! There are no shows in this area. Try searching elsewhere.")
+      eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    } else {
+      eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+      eventsTableView.backgroundView = nil
+    }
+    eventsTableView.reloadData()
+    
     //TODO add pins here using library https://github.com/ribl/FBAnnotationClusteringSwift
   }
   
   private func setMapCenterCoordinates(location: CLLocation) {
+    let regionRadius :CLLocationDistance = 40000
+    
     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
         regionRadius, regionRadius)
     
@@ -85,19 +90,24 @@ class EventsViewController: UIViewController {
   private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
     
       if let searchLocation = dataManager.searchLocation {
-        if (!dataManager.getEvents().isEmpty) {
-          events = lastFmDataProvider.getEvents()
-        }
-        
         setMapCenterCoordinates(searchLocation)
-        loadTableWithEvents()
-        loadMapWithEvents()
+
+        if (dataManager.getEvents().isEmpty) {
+          lastFmDataProvider.getEvents(searchLocation.coordinate)
+        } else {
+          loadEventsToView()
+        }
       } else {
         switch status {
         case .AuthorizedWhenInUse, .AuthorizedAlways:
           if let searchLocation = dataManager.searchLocation {
             setMapCenterCoordinates(searchLocation)
-            loadTableWithEvents()
+            
+            if (dataManager.getEvents().isEmpty) {
+              lastFmDataProvider.getEvents(searchLocation.coordinate)
+            } else {
+              loadEventsToView()
+            }
           } else {
             locationManager.startUpdatingLocation()
           }
@@ -132,7 +142,7 @@ extension EventsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as!EventTableViewCell
     
-    let entry = events[indexPath.row]
+    let entry = dataManager.getEvents()[indexPath.row]
     
     cell.titleLabel.text = entry.title
     cell.whenWhereLabel.text = "\(entry.date) @ \(entry.location)"
@@ -159,7 +169,7 @@ extension EventsViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return events.count
+    return dataManager.getEvents().count
   }
   
 }
@@ -178,9 +188,10 @@ extension EventsViewController: CLLocationManagerDelegate {
       locationManager.stopUpdatingLocation()
       let latestLocation = locations[locations.count - 1] as! CLLocation
       
+      lastFmDataProvider.getEvents(latestLocation.coordinate)
       dataManager.searchLocation = latestLocation
       setMapCenterCoordinates(latestLocation)
-      loadTableWithEvents()
+      loadEventsToView()
   }
   
 }
@@ -193,10 +204,22 @@ extension EventsViewController: LastFMDataProviderDelegate {
     println("about to start getting events")
   }
   
-  func didGetEvents() {
+  func didGetEvents(foundEvents :[Event]) {
+    dataManager.addToEvents(foundEvents)
+    
+    loadEventsToView()
     //TODO: stop spinner here
     println("finished getting events")
+  }
+  
+  func didGetEventsWithError(error: NSError) {
+    //TODO: stop spinner here
 
+    if (error.code == CLError.Network.rawValue) {
+      setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
+    } else {
+      setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
+    }
   }
   
 }

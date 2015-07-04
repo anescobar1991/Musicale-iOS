@@ -33,7 +33,8 @@ class LocationChangeTableViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     
     locationManager.delegate = self
-    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    locationManager.distanceFilter = 1000000000
+    locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     
     searchBar.delegate = self
     
