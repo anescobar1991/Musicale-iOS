@@ -10,11 +10,11 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class EventsViewController: UIViewController {
+class EventsViewController : UIViewController {
   
   private var messageLabel = UILabel()
   private var refreshControl = UIRefreshControl()
-  private var locationManager = CLLocationManager()
+  private var locationManager = UserLocationManager()
   private var lastFmDataProvider :LastFmDataProvider!
   private var dataManager = PersistentDataManager.sharedInstance
   
@@ -26,23 +26,30 @@ class EventsViewController: UIViewController {
     super.viewDidLoad()
     
     lastFmDataProvider = LastFmDataProvider(delegate: self)
-    locationManager.delegate = self
-    locationManager.distanceFilter = 1000000000
-    locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     configureTableView()
   }
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
-    determineLocationServicesAuthorization(CLLocationManager.authorizationStatus())
+    if let searchLocation = dataManager.searchLocation {
+      setMapCenterCoordinates(searchLocation)
+
+      if (dataManager.getEvents().isEmpty) {
+        lastFmDataProvider.getEvents(searchLocation.coordinate)
+      } else {
+        loadEventsToView()
+      }
+    } else {
+      locationManager.getCurrentLocation(self)
+    }
   }
   
   func refreshData(sender:AnyObject) {
     if let location = dataManager.searchLocation {
       lastFmDataProvider.getEvents(location.coordinate)
     } else {
-      setTableViewMessageLabel("Can't get your location. Do you have airplane mode on?")
+      locationManager.getCurrentLocation(self)
     }
     refreshControl.endRefreshing()
   }
@@ -63,12 +70,12 @@ class EventsViewController: UIViewController {
     eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
     messageLabel.text = message
     eventsTableView.backgroundView = messageLabel
+    eventsTableView.reloadData()
   }
   
   private func loadEventsToView() {
     if (dataManager.getEvents().isEmpty) {
       setTableViewMessageLabel("Bummer! There are no shows in this area. Try searching elsewhere.")
-      eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
     } else {
       eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
       eventsTableView.backgroundView = nil
@@ -86,58 +93,11 @@ class EventsViewController: UIViewController {
     
     mapView.setRegion(coordinateRegion, animated: true)
   }
-  
-  private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
-    
-      if let searchLocation = dataManager.searchLocation {
-        setMapCenterCoordinates(searchLocation)
-
-        if (dataManager.getEvents().isEmpty) {
-          lastFmDataProvider.getEvents(searchLocation.coordinate)
-        } else {
-          loadEventsToView()
-        }
-      } else {
-        switch status {
-        case .AuthorizedWhenInUse, .AuthorizedAlways:
-          if let searchLocation = dataManager.searchLocation {
-            setMapCenterCoordinates(searchLocation)
-            
-            if (dataManager.getEvents().isEmpty) {
-              lastFmDataProvider.getEvents(searchLocation.coordinate)
-            } else {
-              loadEventsToView()
-            }
-          } else {
-            locationManager.startUpdatingLocation()
-          }
-        case .NotDetermined:
-          locationManager.requestWhenInUseAuthorization()
-        case .Restricted, .Denied:
-          let alertController = UIAlertController(
-            title: "Location Access Disabled",
-            message: "To get shows near you we need to know where you are! Open Musicale's settings and set location access to 'While Using the App.'",
-            preferredStyle: .Alert)
-          
-          let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-          alertController.addAction(cancelAction)
-          
-          let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
-            if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-              UIApplication.sharedApplication().openURL(url)
-            }
-          }
-          alertController.addAction(openAction)
-          
-          self.presentViewController(alertController, animated: true, completion: nil)
-        }
-      }
-  }
 
 }
 
 // MARK: - UITableViewDataSource
-extension EventsViewController: UITableViewDataSource {
+extension EventsViewController : UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as!EventTableViewCell
@@ -174,30 +134,47 @@ extension EventsViewController: UITableViewDataSource {
   
 }
 
-// MARK: - CLLocationManagerDelegate
-extension EventsViewController: CLLocationManagerDelegate {
+// MARK: - UserLocationManagerDelegate
+extension EventsViewController : UserLocationManagerDelegate {
   
-  func locationManager(manager: CLLocationManager!,
-    didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-      
-      determineLocationServicesAuthorization(status)
+  func didGetLocation(location :CLLocation) {
+    dataManager.clearEvents()
+    lastFmDataProvider.getEvents(location.coordinate)
+    dataManager.searchLocation = location
+    setMapCenterCoordinates(location)
+    loadEventsToView()
   }
   
-  func locationManager(manager: CLLocationManager!,
-    didUpdateLocations locations: [AnyObject]!) {
-      locationManager.stopUpdatingLocation()
-      let latestLocation = locations[locations.count - 1] as! CLLocation
-      
-      lastFmDataProvider.getEvents(latestLocation.coordinate)
-      dataManager.searchLocation = latestLocation
-      setMapCenterCoordinates(latestLocation)
-      loadEventsToView()
+  func locationServicesDidFailWithErrors(error: NSError) {
+    setTableViewMessageLabel("Can't figure out your current location. Do you have airplane mode on?")
+    println(error)
+  }
+  
+  func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus) {
+    let alertController = UIAlertController(
+      title: "Location Access Disabled",
+      message: "To find shows near you we need to know where you are! Open Musicale's settings and set location access to 'While Using the App.'",
+      preferredStyle: .Alert)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+      self.setTableViewMessageLabel("Can't get shows around you without knowing where you are. You can still set a location on the 'Change location' screen though!")
+    }
+    alertController.addAction(cancelAction)
+    
+    let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+      if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+        UIApplication.sharedApplication().openURL(url)
+      }
+    }
+    alertController.addAction(openAction)
+    
+    self.presentViewController(alertController, animated: true, completion: nil)
   }
   
 }
 
 // MARK: - LastFMDataProviderDelegate
-extension EventsViewController: LastFMDataProviderDelegate {
+extension EventsViewController : LastFMDataProviderDelegate {
   
   func aboutToGetEvents() {
     //TODO: start spinner here
@@ -215,7 +192,7 @@ extension EventsViewController: LastFMDataProviderDelegate {
   func didGetEventsWithError(error: NSError) {
     //TODO: stop spinner here
 
-    if (error.code == CLError.Network.rawValue) {
+    if (error.code == -1009) {
       setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
     } else {
       setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")

@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class MoreOptionsTableViewController: UITableViewController {
+class MoreOptionsTableViewController : UITableViewController {
   
   let persistentData = PersistentDataManager.sharedInstance
 

@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class LocationChangeTableViewController: UIViewController {
+class LocationChangeTableViewController : UIViewController {
   
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var locationsTableView: UITableView!
@@ -18,7 +18,7 @@ class LocationChangeTableViewController: UIViewController {
   private var messageLabel = UILabel()
   private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   
-  private var locationManager = CLLocationManager()
+  private var locationManager = UserLocationManager()
   private var dataManager = PersistentDataManager.sharedInstance
 
   private var places: [CLPlacemark] = []
@@ -31,10 +31,6 @@ class LocationChangeTableViewController: UIViewController {
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-    
-    locationManager.delegate = self
-    locationManager.distanceFilter = 1000000000
-    locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     
     searchBar.delegate = self
     
@@ -66,7 +62,6 @@ class LocationChangeTableViewController: UIViewController {
     self.animateTableViewUp(false)
   }
   
-  
   private func animateTableViewUp(up: Bool) {
     let movement = (up ? keyboardHeight : -keyboardHeight)
     
@@ -76,38 +71,10 @@ class LocationChangeTableViewController: UIViewController {
     })
   }
   
-  private func determineLocationServicesAuthorization(status: CLAuthorizationStatus) {
-    
-      switch status {
-      case .AuthorizedWhenInUse, .AuthorizedAlways:
-          locationManager.startUpdatingLocation()
-      case .NotDetermined:
-        locationManager.requestWhenInUseAuthorization()
-      case .Restricted, .Denied:
-        let alertController = UIAlertController(
-          title: "Location Access Disabled",
-          message: "Can't get your location without your permission. Open Musicale's settings and set location access to 'While Using the App.'",
-          preferredStyle: .Alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
-          if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-            UIApplication.sharedApplication().openURL(url)
-          }
-        }
-        alertController.addAction(openAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-      }
-    }
-
-  
   @IBAction func onUseCurrentLocationTouchUp(sender: AnyObject) {
-    determineLocationServicesAuthorization(CLLocationManager.authorizationStatus())
     let button = sender as! UIButton
     button.backgroundColor = UIColor.whiteColor()
+    locationManager.getCurrentLocation(self)
   }
   
   @IBAction func onUseCurrentLocationTouchDown(sender: AnyObject) {
@@ -156,7 +123,7 @@ class LocationChangeTableViewController: UIViewController {
 }
 
 // MARK: - UISearchBarDelegate
-extension LocationChangeTableViewController: UISearchBarDelegate {
+extension LocationChangeTableViewController : UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     places.removeAll(keepCapacity: false)
@@ -227,7 +194,8 @@ extension LocationChangeTableViewController : UITableViewDataSource {
   
 }
 
-extension LocationChangeTableViewController: UITableViewDelegate {
+// MARK: - UITableViewDelegate
+extension LocationChangeTableViewController : UITableViewDelegate {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     dataManager.searchLocation = places[indexPath.row].location
@@ -238,20 +206,38 @@ extension LocationChangeTableViewController: UITableViewDelegate {
   
 }
 
-// MARK: - CLLocationManagerDelegate
-extension LocationChangeTableViewController: CLLocationManagerDelegate {
-
+// MARK: - UserLocationManagerDelegate
+extension LocationChangeTableViewController : UserLocationManagerDelegate {
   
-  func locationManager(manager: CLLocationManager!,
-    didUpdateLocations locations: [AnyObject]!) {
-      locationManager.stopUpdatingLocation()
-      
-      let latestLocation = locations[locations.count - 1] as! CLLocation
-      
-      dataManager.searchLocation = latestLocation
-      dataManager.searchPlace = nil
-      dataManager.clearEvents()
-      performSegueWithIdentifier("unwindToMoreView", sender: nil)
+  func didGetLocation(location :CLLocation) {
+    dataManager.searchLocation = location
+    dataManager.searchPlace = nil
+    dataManager.clearEvents()
+    performSegueWithIdentifier("unwindToMoreView", sender: nil)
+  }
+  
+  
+  func locationServicesDidFailWithErrors(error: NSError) {
+    setTableViewMessageLabel("Can't figure out your current location. Do you have airplane mode on?")
+  }
+  
+  func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus) {
+    let alertController = UIAlertController(
+      title: "Location Access Disabled",
+      message: "Can't get your location without your permission. Open Musicale's settings and set location access to 'While Using the App.'",
+      preferredStyle: .Alert)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+      alertController.addAction(cancelAction)
+    
+    let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+      if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+        UIApplication.sharedApplication().openURL(url)
+      }
+    }
+    alertController.addAction(openAction)
+    
+    self.presentViewController(alertController, animated: true, completion: nil)
   }
   
 }
