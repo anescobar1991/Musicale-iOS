@@ -137,6 +137,8 @@ extension EventsViewController : UITableViewDataSource {
 // MARK: - UserLocationManagerDelegate
 extension EventsViewController : UserLocationManagerDelegate {
   
+  func aboutToGetLocation() {}
+  
   func didGetLocation(location :CLLocation) {
     dataManager.clearEvents()
     lastFmDataProvider.getEvents(location.coordinate)

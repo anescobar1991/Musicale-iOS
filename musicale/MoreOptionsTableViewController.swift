@@ -31,20 +31,7 @@ class MoreOptionsTableViewController : UITableViewController {
     } else {
       let location = persistentData.searchLocation
       
-      CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void
-        in
-        
-        if error != nil {
-          self.searchLocation.text = ""
-          return
-        }
-        
-        if placemarks.count > 0 {
-          let place = placemarks[0] as! CLPlacemark
-          self.persistentData.searchPlace = place
-          self.searchLocation.text = self.sanitizePlaceToDisplay(place)
-        }
-      })
+      Geocoder().reverseGeocode(location!, delegate: self)
     }
   }
   
@@ -61,15 +48,29 @@ class MoreOptionsTableViewController : UITableViewController {
     return sanitizedPlaceString
   }
 
-
-  // MARK: - Table view data source
-
+// MARK: - Table view data source
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
-
+  
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 2
   }
+  
+}
 
+extension MoreOptionsTableViewController : ReverseGeocoderDelegate {
+  
+  func aboutToReverseGeocode() {}
+  
+  func didGetReverseGeocodedPlacemark(placemarks :[CLPlacemark]) {
+    let place = placemarks[0]
+    persistentData.searchPlace = place
+    searchLocation.text = sanitizePlaceToDisplay(place)
+  }
+  
+  func reserveGeocodingDidFailWithErrors(error : NSError) {
+    searchLocation.text = ""
+  }
+  
 }

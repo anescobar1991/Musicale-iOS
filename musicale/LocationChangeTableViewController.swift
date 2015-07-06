@@ -83,7 +83,6 @@ class LocationChangeTableViewController : UIViewController {
   }
   
   @IBAction func onUseCurrentLocationTouchDragOutside(sender: AnyObject) {
-    
     let button = sender as! UIButton
     button.backgroundColor = UIColor.whiteColor()
   }
@@ -131,36 +130,10 @@ extension LocationChangeTableViewController : UISearchBarDelegate {
     locationsTableView.reloadData()
     
     displayProgressBar(true)
-
-    let geoCoder = CLGeocoder()
     
     let addressString = searchBar.text
     
-    //TODO: only do this if network connection
-    geoCoder.geocodeAddressString(addressString, completionHandler:
-      {(placemarks: [AnyObject]!, error: NSError!) in
-        
-        self.displayProgressBar(false)
-
-        if error != nil {
-          let errorCode = error.code
-          
-          if (errorCode == CLError.GeocodeFoundNoResult.rawValue || errorCode == CLError.GeocodeFoundPartialResult.rawValue) {
-            self.setTableViewMessageLabel("No locations found for your search.")
-          } else if (errorCode == CLError.Network.rawValue) {
-            self.setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
-          } else {
-            self.setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
-          }
-        } else {
-          if placemarks.count > 0 {
-            let placeResults = placemarks as! [CLPlacemark]
-            self.places.extend(placeResults)
-            self.configureTableViewAesthetics()
-            self.locationsTableView.reloadData()
-          }
-        }
-    })
+    Geocoder().forwardGeocode(addressString, delegate: self)
   }
   
 }
@@ -209,6 +182,8 @@ extension LocationChangeTableViewController : UITableViewDelegate {
 // MARK: - UserLocationManagerDelegate
 extension LocationChangeTableViewController : UserLocationManagerDelegate {
   
+  func aboutToGetLocation() {}
+
   func didGetLocation(location :CLLocation) {
     dataManager.searchLocation = location
     dataManager.searchPlace = nil
@@ -238,6 +213,35 @@ extension LocationChangeTableViewController : UserLocationManagerDelegate {
     alertController.addAction(openAction)
     
     self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
+}
+
+// MARK: - UserLocationManagerDelegate
+extension LocationChangeTableViewController : ForwardGeocoderDelegate {
+  
+  func aboutToForwardGeocode() {}
+  
+  func didGetForwardGeocodedPlacemark(placemarks :[CLPlacemark]) {
+    displayProgressBar(false)
+
+    places.extend(placemarks)
+    configureTableViewAesthetics()
+    locationsTableView.reloadData()
+  }
+  
+  func forwardGeocodingDidFailWithErrors(error : NSError) {
+    self.displayProgressBar(false)
+    
+    let errorCode = error.code
+    
+    if (errorCode == CLError.GeocodeFoundNoResult.rawValue || errorCode == CLError.GeocodeFoundPartialResult.rawValue) {
+      setTableViewMessageLabel("No locations found for your search.")
+    } else if (errorCode == CLError.Network.rawValue) {
+      setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
+    } else {
+      setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
+    }
   }
   
 }

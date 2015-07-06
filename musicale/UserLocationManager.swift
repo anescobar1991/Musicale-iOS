@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 
 protocol UserLocationManagerDelegate {
+  func aboutToGetLocation()
   func didGetLocation(location :CLLocation)
   func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus)
   func locationServicesDidFailWithErrors(error : NSError)
@@ -47,6 +48,7 @@ class UserLocationManager : NSObject, CLLocationManagerDelegate {
   private func startUpdatingLocationIfAuthorized(status: CLAuthorizationStatus) {
     switch status {
     case .AuthorizedWhenInUse, .AuthorizedAlways:
+      delegate.aboutToGetLocation()
       locationManager.startUpdatingLocation()
     case .NotDetermined:
       locationManager.requestWhenInUseAuthorization()

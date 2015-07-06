@@ -15,6 +15,7 @@
 		4116C0E51AE216C4005FBCA2 /* blink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4116C0E41AE216C4005FBCA2 /* blink.jpg */; };
 		412CEB121B478D7600CEE159 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB111B478D7600CEE159 /* EventsViewController.swift */; };
 		412CEB141B48564300CEE159 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB131B48564300CEE159 /* UserLocationManager.swift */; };
+		412CEB161B49969900CEE159 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB151B49969900CEE159 /* Geocoder.swift */; };
 		415666981B40EFF300C102CB /* define_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 415666971B40EFF300C102CB /* define_location.png */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
 		417091031AD9B89A0095A7BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417091011AD9B89A0095A7BB /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		4116C0E41AE216C4005FBCA2 /* blink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blink.jpg; sourceTree = "<group>"; };
 		412CEB111B478D7600CEE159 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		412CEB131B48564300CEE159 /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
+		412CEB151B49969900CEE159 /* Geocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		415666971B40EFF300C102CB /* define_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = define_location.png; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417090FC1AD9B89A0095A7BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				41128A891B1FDC0300366DFB /* LastFmDataProvider.swift */,
 				41128A8B1B1FE37700366DFB /* PersistentDataManager.swift */,
 				412CEB131B48564300CEE159 /* UserLocationManager.swift */,
+				412CEB151B49969900CEE159 /* Geocoder.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41128A921B22A37800366DFB /* LocationChangeTableViewController.swift in Sources */,
+				412CEB161B49969900CEE159 /* Geocoder.swift in Sources */,
 				412CEB121B478D7600CEE159 /* EventsViewController.swift in Sources */,
 				417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */,
 				417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */,
