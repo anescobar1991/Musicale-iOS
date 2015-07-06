@@ -46,12 +46,12 @@ class EventsViewController : UIViewController {
   }
   
   func refreshData(sender:AnyObject) {
+    refreshControl.endRefreshing()
     if let location = dataManager.searchLocation {
       lastFmDataProvider.getEvents(location.coordinate)
     } else {
       locationManager.getCurrentLocation(self)
     }
-    refreshControl.endRefreshing()
   }
   
   private func configureTableView() {
@@ -144,12 +144,10 @@ extension EventsViewController : UserLocationManagerDelegate {
     lastFmDataProvider.getEvents(location.coordinate)
     dataManager.searchLocation = location
     setMapCenterCoordinates(location)
-    loadEventsToView()
   }
   
   func locationServicesDidFailWithErrors(error: NSError) {
     setTableViewMessageLabel("Can't figure out your current location. Do you have airplane mode on?")
-    println(error)
   }
   
   func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus) {
@@ -179,20 +177,22 @@ extension EventsViewController : UserLocationManagerDelegate {
 extension EventsViewController : LastFMDataProviderDelegate {
   
   func aboutToGetEvents() {
-    //TODO: start spinner here
+    eventsTableView.contentOffset = CGPointMake(0, -refreshControl.frame.size.height);
+    refreshControl.beginRefreshing()
+
     println("about to start getting events")
   }
   
   func didGetEvents(foundEvents :[Event]) {
     dataManager.addToEvents(foundEvents)
-    
+    refreshControl.endRefreshing()
+
     loadEventsToView()
-    //TODO: stop spinner here
     println("finished getting events")
   }
   
   func didGetEventsWithError(error: NSError) {
-    //TODO: stop spinner here
+    refreshControl.endRefreshing()
 
     if (error.code == -1009) {
       setTableViewMessageLabel("No internet connection found. Are you connected to a network?")

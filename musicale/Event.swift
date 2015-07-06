@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Andres Escobar. All rights reserved.
 //
 
-import Foundation
-
 class Event {
   
   var title: String

@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Andres Escobar. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import CoreLocation
 import SwiftyJSON
@@ -35,9 +34,9 @@ class LastFmDataProvider {
           self.delegate.didGetEventsWithError(error)
         } else {
           let json = JSON(data!)
+          println(json)
           //TODO: create objects out of json here
 //          println(json["events"])
-          
           
           self.delegate.didGetEvents([])
         }
