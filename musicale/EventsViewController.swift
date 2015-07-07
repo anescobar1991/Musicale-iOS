@@ -20,6 +20,7 @@ class EventsViewController : UIViewController {
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var eventsTableView: UITableView!
+  private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   
   override func viewDidLoad() {
       
@@ -64,6 +65,9 @@ class EventsViewController : UIViewController {
     
     eventsTableView.rowHeight = UITableViewAutomaticDimension
     eventsTableView.estimatedRowHeight = 100.0
+    
+    progressBar.center = eventsTableView.center
+    progressBar.hidesWhenStopped = true
   }
   
   private func setTableViewMessageLabel(message: String) {
@@ -71,6 +75,16 @@ class EventsViewController : UIViewController {
     messageLabel.text = message
     eventsTableView.backgroundView = messageLabel
     eventsTableView.reloadData()
+  }
+  
+  private func displayProgressBar(display: Bool) {
+    if (display) {
+      eventsTableView.backgroundView = progressBar
+      progressBar.startAnimating()
+    } else {
+      eventsTableView.backgroundView = nil
+      progressBar.stopAnimating()
+    }
   }
   
   private func loadEventsToView() {
@@ -177,22 +191,23 @@ extension EventsViewController : UserLocationManagerDelegate {
 extension EventsViewController : LastFMDataProviderDelegate {
   
   func aboutToGetEvents() {
-    eventsTableView.contentOffset = CGPointMake(0, -refreshControl.frame.size.height);
-    refreshControl.beginRefreshing()
+    if (!refreshControl.refreshing) {
+      displayProgressBar(true)
+    }
 
     println("about to start getting events")
   }
   
   func didGetEvents(foundEvents :[Event]) {
     dataManager.addToEvents(foundEvents)
-    refreshControl.endRefreshing()
+    displayProgressBar(false)
 
     loadEventsToView()
     println("finished getting events")
   }
   
   func didGetEventsWithError(error: NSError) {
-    refreshControl.endRefreshing()
+    displayProgressBar(false)
 
     if (error.code == -1009) {
       setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
