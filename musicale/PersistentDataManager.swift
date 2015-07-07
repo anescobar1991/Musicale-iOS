@@ -11,6 +11,8 @@ import CoreLocation
 class PersistentDataManager {
   var searchPlace :CLPlacemark?
   var searchLocation :CLLocation?
+  var eventResultsPage :Int?
+  var eventResultsTotalPages :Int?
   private var events : [Event] = []
       
   static let sharedInstance = PersistentDataManager()

@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Kingfisher
 
 class EventsViewController : UIViewController {
   
@@ -37,6 +38,7 @@ class EventsViewController : UIViewController {
       setMapCenterCoordinates(searchLocation)
 
       if (dataManager.getEvents().isEmpty) {
+        eventsTableView.reloadData()
         lastFmDataProvider.getEvents(searchLocation.coordinate)
       } else {
         loadEventsToView()
@@ -48,6 +50,9 @@ class EventsViewController : UIViewController {
   
   func refreshData(sender:AnyObject) {
     refreshControl.endRefreshing()
+    dataManager.clearEvents()
+    eventsTableView.reloadData()
+
     if let location = dataManager.searchLocation {
       lastFmDataProvider.getEvents(location.coordinate)
     } else {
@@ -119,7 +124,9 @@ extension EventsViewController : UITableViewDataSource {
     let entry = dataManager.getEvents()[indexPath.row]
     
     cell.titleLabel.text = entry.title
-    cell.whenWhereLabel.text = "\(entry.date) @ \(entry.location)"
+    cell.whenWhereLabel.text = "\(entry.date) @ \(entry.venueName)"
+    cell.eventImage.kf_setImageWithURL(NSURL(string: entry.imageUrl)!)
+
     //TODO: download image here using https://github.com/onevcat/Kingfisher
     return cell
   }
