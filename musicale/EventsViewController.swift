@@ -49,7 +49,6 @@ class EventsViewController : UIViewController {
   }
   
   func refreshData(sender:AnyObject) {
-    refreshControl.endRefreshing()
     dataManager.clearEvents()
     eventsTableView.reloadData()
 
@@ -125,9 +124,10 @@ extension EventsViewController : UITableViewDataSource {
     
     cell.titleLabel.text = entry.title
     cell.whenWhereLabel.text = "\(entry.date) @ \(entry.venueName)"
-    cell.eventImage.kf_setImageWithURL(NSURL(string: entry.imageUrl)!)
-
-    //TODO: download image here using https://github.com/onevcat/Kingfisher
+    if let imageUrl = entry.imageUrl {
+      cell.eventImage.kf_setImageWithURL(NSURL(string: imageUrl)!, placeholderImage: UIImage(contentsOfFile: "placeholder.png"))
+    }
+    
     return cell
   }
   
@@ -201,8 +201,6 @@ extension EventsViewController : LastFMDataProviderDelegate {
     if (!refreshControl.refreshing) {
       displayProgressBar(true)
     }
-
-    println("about to start getting events")
   }
   
   func didGetEvents(foundEvents :[Event]) {
@@ -210,7 +208,9 @@ extension EventsViewController : LastFMDataProviderDelegate {
     displayProgressBar(false)
 
     loadEventsToView()
-    println("finished getting events")
+    if (refreshControl.refreshing) {
+      refreshControl.endRefreshing()
+    }
   }
   
   func didGetEventsWithError(error: NSError) {

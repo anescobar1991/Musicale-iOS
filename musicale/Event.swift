@@ -12,7 +12,7 @@ class Event {
   var title: String
   var date: String
   var venueName: String
-  var imageUrl: String
+  var imageUrl: String?
   var latLng: CLLocationCoordinate2D
   
   init(title: String, date: String, venueName: String, imageUrl: String,

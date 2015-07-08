@@ -65,7 +65,7 @@
                                                         <rect key="frame" x="8" y="141" width="42" height="30"/>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IPY-zN-Kra">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="IPY-zN-Kra">
                                                     <rect key="frame" x="10" y="10" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="2W3-Jg-gep"/>
@@ -484,6 +484,7 @@
     </scenes>
     <resources>
         <image name="define_location.png" width="20" height="20"/>
+        <image name="placeholder.png" width="327" height="327"/>
     </resources>
     <color key="tintColor" red="0.1019607843" green="0.13725490200000001" blue="0.4941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
