@@ -16,6 +16,13 @@
 		412CEB141B48564300CEE159 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB131B48564300CEE159 /* UserLocationManager.swift */; };
 		412CEB161B49969900CEE159 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB151B49969900CEE159 /* Geocoder.swift */; };
 		412CEB181B4CB1A100CEE159 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 412CEB171B4CB1A100CEE159 /* placeholder.png */; };
+		412CEB1B1B4CC16300CEE159 /* FBClusteringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB1A1B4CC16300CEE159 /* FBClusteringManager.swift */; };
+		412CEB1D1B4CC16A00CEE159 /* FBAnnotationCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB1C1B4CC16A00CEE159 /* FBAnnotationCluster.swift */; };
+		412CEB1F1B4CC18000CEE159 /* FBAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB1E1B4CC18000CEE159 /* FBAnnotationClusterView.swift */; };
+		412CEB211B4CC18500CEE159 /* FBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB201B4CC18500CEE159 /* FBAnnotation.swift */; };
+		412CEB231B4CC19000CEE159 /* FBQuadTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB221B4CC19000CEE159 /* FBQuadTree.swift */; };
+		412CEB251B4CC19D00CEE159 /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB241B4CC19D00CEE159 /* FBQuadTreeNode.swift */; };
+		412CEB271B4CC1A300CEE159 /* FBBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB261B4CC1A300CEE159 /* FBBoundingBox.swift */; };
 		415666981B40EFF300C102CB /* define_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 415666971B40EFF300C102CB /* define_location.png */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
 		417091031AD9B89A0095A7BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417091011AD9B89A0095A7BB /* Main.storyboard */; };
@@ -47,6 +54,13 @@
 		412CEB131B48564300CEE159 /* UserLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		412CEB151B49969900CEE159 /* Geocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		412CEB171B4CB1A100CEE159 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		412CEB1A1B4CC16300CEE159 /* FBClusteringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBClusteringManager.swift; sourceTree = "<group>"; };
+		412CEB1C1B4CC16A00CEE159 /* FBAnnotationCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationCluster.swift; sourceTree = "<group>"; };
+		412CEB1E1B4CC18000CEE159 /* FBAnnotationClusterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotationClusterView.swift; sourceTree = "<group>"; };
+		412CEB201B4CC18500CEE159 /* FBAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAnnotation.swift; sourceTree = "<group>"; };
+		412CEB221B4CC19000CEE159 /* FBQuadTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTree.swift; sourceTree = "<group>"; };
+		412CEB241B4CC19D00CEE159 /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
+		412CEB261B4CC1A300CEE159 /* FBBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBoundingBox.swift; sourceTree = "<group>"; };
 		415666971B40EFF300C102CB /* define_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = define_location.png; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417090FC1AD9B89A0095A7BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +136,20 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		412CEB191B4CC12500CEE159 /* FBAnnotationClustering */ = {
+			isa = PBXGroup;
+			children = (
+				412CEB1E1B4CC18000CEE159 /* FBAnnotationClusterView.swift */,
+				412CEB261B4CC1A300CEE159 /* FBBoundingBox.swift */,
+				412CEB241B4CC19D00CEE159 /* FBQuadTreeNode.swift */,
+				412CEB221B4CC19000CEE159 /* FBQuadTree.swift */,
+				412CEB201B4CC18500CEE159 /* FBAnnotation.swift */,
+				412CEB1A1B4CC16300CEE159 /* FBClusteringManager.swift */,
+				412CEB1C1B4CC16A00CEE159 /* FBAnnotationCluster.swift */,
+			);
+			name = FBAnnotationClustering;
+			sourceTree = "<group>";
+		};
 		417090EF1AD9B89A0095A7BB = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +174,7 @@
 		417090FA1AD9B89A0095A7BB /* musicale */ = {
 			isa = PBXGroup;
 			children = (
+				412CEB191B4CC12500CEE159 /* FBAnnotationClustering */,
 				41128A881B1FDBEA00366DFB /* API */,
 				41128A871B1FDABD00366DFB /* Controllers */,
 				41128A861B1FDA4F00366DFB /* Views */,
@@ -361,14 +390,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				412CEB211B4CC18500CEE159 /* FBAnnotation.swift in Sources */,
 				41128A921B22A37800366DFB /* LocationChangeTableViewController.swift in Sources */,
+				412CEB1F1B4CC18000CEE159 /* FBAnnotationClusterView.swift in Sources */,
+				412CEB1B1B4CC16300CEE159 /* FBClusteringManager.swift in Sources */,
 				412CEB161B49969900CEE159 /* Geocoder.swift in Sources */,
 				412CEB121B478D7600CEE159 /* EventsViewController.swift in Sources */,
 				417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */,
 				417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */,
+				412CEB251B4CC19D00CEE159 /* FBQuadTreeNode.swift in Sources */,
+				412CEB271B4CC1A300CEE159 /* FBBoundingBox.swift in Sources */,
+				412CEB231B4CC19000CEE159 /* FBQuadTree.swift in Sources */,
 				417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */,
 				41128A8C1B1FE37700366DFB /* PersistentDataManager.swift in Sources */,
 				41128A941B236CE900366DFB /* MoreOptionsTableViewController.swift in Sources */,
+				412CEB1D1B4CC16A00CEE159 /* FBAnnotationCluster.swift in Sources */,
 				41128A8A1B1FDC0300366DFB /* LastFmDataProvider.swift in Sources */,
 				412CEB141B48564300CEE159 /* UserLocationManager.swift in Sources */,
 			);

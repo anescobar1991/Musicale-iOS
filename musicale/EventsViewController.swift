@@ -13,15 +13,18 @@ import Kingfisher
 
 class EventsViewController : UIViewController {
   
+  private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   private var messageLabel = UILabel()
   private var refreshControl = UIRefreshControl()
+  
   private var locationManager = UserLocationManager()
   private var lastFmDataProvider :LastFmDataProvider!
   private var dataManager = PersistentDataManager.sharedInstance
+  private var clusteringManager = FBClusteringManager()
+
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var eventsTableView: UITableView!
-  private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   
   override func viewDidLoad() {
       
@@ -29,6 +32,7 @@ class EventsViewController : UIViewController {
     
     lastFmDataProvider = LastFmDataProvider(delegate: self)
     configureTableView()
+    mapView.delegate = self
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -92,19 +96,27 @@ class EventsViewController : UIViewController {
   }
   
   private func loadEventsToView() {
+    mapView.removeAnnotations(mapView.annotations)
+    clusteringManager.setAnnotations([])
+    
     if (dataManager.getEvents().isEmpty) {
       setTableViewMessageLabel("Bummer! There are no shows in this area. Try searching elsewhere.")
     } else {
+      var pins :[FBAnnotation] = []
+      for event in dataManager.getEvents() {
+        let pin = FBAnnotation()
+        pin.coordinate = event.latLng
+        pins.append(pin)
+      }
+      clusteringManager.addAnnotations(pins)
       eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
       eventsTableView.backgroundView = nil
     }
     eventsTableView.reloadData()
-    
-    //TODO add pins here using library https://github.com/ribl/FBAnnotationClusteringSwift
   }
   
   private func setMapCenterCoordinates(location: CLLocation) {
-    let regionRadius :CLLocationDistance = 40000
+    let regionRadius :CLLocationDistance = 30000
     
     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
         regionRadius, regionRadius)
@@ -125,7 +137,7 @@ extension EventsViewController : UITableViewDataSource {
     cell.titleLabel.text = entry.title
     cell.whenWhereLabel.text = "\(entry.date) @ \(entry.venueName)"
     if let imageUrl = entry.imageUrl {
-      cell.eventImage.kf_setImageWithURL(NSURL(string: imageUrl)!, placeholderImage: UIImage(contentsOfFile: "placeholder.png"))
+      cell.eventImage.kf_setImageWithURL(NSURL(string: imageUrl)!, placeholderImage: UIImage(named: "placeholder"))
     }
     
     return cell
@@ -223,4 +235,33 @@ extension EventsViewController : LastFMDataProviderDelegate {
     }
   }
   
+}
+
+extension EventsViewController : MKMapViewDelegate {
+  
+  func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+    NSOperationQueue().addOperationWithBlock({
+      let mapBoundsWidth = Double(self.mapView.bounds.size.width)
+      let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
+      let scale:Double = mapBoundsWidth / mapRectWidth
+      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale:scale)
+      self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mapView)
+    })
+  }
+  
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    var reuseId = ""
+    if annotation.isKindOfClass(FBAnnotationCluster) {
+      reuseId = "Cluster"
+      var clusterView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+      clusterView = FBAnnotationClusterView(annotation: annotation, reuseIdentifier: reuseId)
+      return clusterView
+    } else {
+      reuseId = "Pin"
+      var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+      pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+      pinView!.pinColor = .Green
+      return pinView
+    }
+  }
 }

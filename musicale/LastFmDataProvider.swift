@@ -43,41 +43,35 @@ class LastFmDataProvider {
           if let eventsArray = json["events"]["event"].array {
             
             for event in eventsArray {
-              let title = event["title"].string
-              var date = event["startDate"].string
-              let range = Range(start:advance(date!.startIndex, 4), end: advance(date!.startIndex, 16))
-              date = date?.substringWithRange(range)
-
-              let venueName = event["venue"]["name"].string
-              let imageUrl = event["image"].array!.last!["#text"].string
-              
-              let lat = (event["venue"]["location"]["geo:point"]["geo:lat"].string! as NSString).doubleValue
-              let lng = (event["venue"]["location"]["geo:point"]["geo:long"].string! as NSString).doubleValue
-              let latLng = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-              
-              let event = Event(title: title!, date: date!, venueName: venueName!, imageUrl: imageUrl!, latLng: latLng)
-              events.append(event)
+              events.append(self.createEventModelFromJSON(event))
             }
             
           } else {
-            let eventMap = json["events"]["event"]
-            
-            let title = eventMap["title"].string
-            let date = eventMap["startDate"].string
-            let venueName = eventMap["venue"]["name"].string
-            let imageUrl = eventMap["image"].array!.last!["#text"].string
-            
-            let lat = (eventMap["venue"]["location"]["geo:point"]["geo:lat"].string! as NSString).doubleValue
-            let lng = (eventMap["venue"]["location"]["geo:point"]["geo:long"].string! as NSString).doubleValue
-            let latLng = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-            
-            let event = Event(title: title!, date: date!, venueName: venueName!, imageUrl: imageUrl!, latLng: latLng)
-            events.append(event)
+            let event = json["events"]["event"]
+            events.append(self.createEventModelFromJSON(event))
           }
           
           self.delegate.didGetEvents(events)
         }
     }
   }
+  
+  private func createEventModelFromJSON(json :SwiftyJSON.JSON) -> Event {
+    let title = json["title"].string
+    var date = json["startDate"].string
+    let range = Range(start:advance(date!.startIndex, 4), end: advance(date!.startIndex, 16))
+    date = date?.substringWithRange(range)
     
+    let venueName = json["venue"]["name"].string
+    let imageUrl = json["image"].array!.last!["#text"].string
+    
+    let lat = (json["venue"]["location"]["geo:point"]["geo:lat"].string! as NSString).doubleValue
+    let lng = (json["venue"]["location"]["geo:point"]["geo:long"].string! as NSString).doubleValue
+    let latLng = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+    
+    let event = Event(title: title!, date: date!, venueName: venueName!, imageUrl: imageUrl!, latLng: latLng)
+    
+    return event
+  }
+  
 }
