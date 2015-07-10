@@ -11,7 +11,7 @@ import CoreLocation
 class PersistentDataManager {
   var searchPlace :CLPlacemark?
   var searchLocation :CLLocation?
-  var eventResultsPage :Int?
+  var eventResultsPage :Int = 0
   var eventResultsTotalPages :Int?
   private var events : [Event] = []
       

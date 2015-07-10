@@ -175,6 +175,7 @@ extension LocationChangeTableViewController : UITableViewDelegate {
     dataManager.searchPlace = places[indexPath.row]
     
     dataManager.clearEvents()
+    dataManager.eventResultsTotalPages = 0
   }
   
 }
@@ -188,6 +189,7 @@ extension LocationChangeTableViewController : UserLocationManagerDelegate {
     dataManager.searchLocation = location
     dataManager.searchPlace = nil
     dataManager.clearEvents()
+    dataManager.eventResultsTotalPages = 0
     performSegueWithIdentifier("unwindToMoreView", sender: nil)
   }
   

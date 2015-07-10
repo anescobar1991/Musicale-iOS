@@ -19,6 +19,9 @@ class EventTableViewCell : UITableViewCell {
     
     eventImage.layer.cornerRadius = 33.0
     eventImage.clipsToBounds = true
+    separatorInset = UIEdgeInsetsZero
+    preservesSuperviewLayoutMargins = false
+    layoutMargins = UIEdgeInsetsZero
   }
 
   override func setSelected(selected: Bool, animated: Bool) {

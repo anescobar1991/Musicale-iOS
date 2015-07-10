@@ -36,7 +36,13 @@ class LastFmDataProvider {
           let json = JSON(data!)
           
           let dataManager = PersistentDataManager.sharedInstance
-          dataManager.eventResultsPage = json["events"]["@attr"]["page"].string!.toInt()
+          if ((json["error"].type) != .Null) {
+            let error = NSError(domain: "noEventsFoundForGivenLocation", code: 8, userInfo: nil)
+            self.delegate.didGetEventsWithError(error)
+            return
+          }
+          
+          dataManager.eventResultsPage = json["events"]["@attr"]["page"].string!.toInt()!
           dataManager.eventResultsTotalPages = json["events"]["@attr"]["totalPages"].string!.toInt()
           
           var events :[Event] = []

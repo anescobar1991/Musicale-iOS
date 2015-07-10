@@ -21,7 +21,6 @@ class EventsViewController : UIViewController {
   private var lastFmDataProvider :LastFmDataProvider!
   private var dataManager = PersistentDataManager.sharedInstance
   private var clusteringManager = FBClusteringManager()
-
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var eventsTableView: UITableView!
@@ -53,6 +52,7 @@ class EventsViewController : UIViewController {
   }
   
   func refreshData(sender:AnyObject) {
+    dataManager.eventResultsPage = 0
     dataManager.clearEvents()
     eventsTableView.reloadData()
 
@@ -145,19 +145,11 @@ extension EventsViewController : UITableViewDataSource {
   
   func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
     forRowAtIndexPath indexPath: NSIndexPath) {
-      // Remove separator inset
-      if cell.respondsToSelector("setSeparatorInset:") {
-        cell.separatorInset = UIEdgeInsetsZero
-      }
       
-      // Prevent the cell from inheriting the Table View's margin settings
-      if cell.respondsToSelector("setPreservesSuperviewLayoutMargins:") {
-        cell.preservesSuperviewLayoutMargins = false
-      }
-      
-      // Explictly set your cell's layout margins
-      if cell.respondsToSelector("setLayoutMargins:") {
-        cell.layoutMargins = UIEdgeInsetsZero
+      if(indexPath.row == dataManager.getEvents().count/2) {
+        if ((dataManager.eventResultsPage + 1) <= dataManager.eventResultsTotalPages) {
+          lastFmDataProvider.getEvents(dataManager.searchLocation!.coordinate, pageNumber: ++dataManager.eventResultsPage)
+        }
       }
   }
   
@@ -173,6 +165,8 @@ extension EventsViewController : UserLocationManagerDelegate {
   func aboutToGetLocation() {}
   
   func didGetLocation(location :CLLocation) {
+    dataManager.eventResultsPage = 0
+    dataManager.eventResultsTotalPages = 0
     dataManager.clearEvents()
     lastFmDataProvider.getEvents(location.coordinate)
     dataManager.searchLocation = location
@@ -218,7 +212,7 @@ extension EventsViewController : LastFMDataProviderDelegate {
   func didGetEvents(foundEvents :[Event]) {
     dataManager.addToEvents(foundEvents)
     displayProgressBar(false)
-
+    
     loadEventsToView()
     if (refreshControl.refreshing) {
       refreshControl.endRefreshing()
@@ -228,8 +222,10 @@ extension EventsViewController : LastFMDataProviderDelegate {
   func didGetEventsWithError(error: NSError) {
     displayProgressBar(false)
 
-    if (error.code == -1009) {
+    if (error.code == -1009 && dataManager.eventResultsPage > 1) {
       setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
+    } else if (error.code == 8) {
+      setTableViewMessageLabel("No events found in your area. Try searching elsewhere.")
     } else {
       setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
     }
@@ -237,7 +233,18 @@ extension EventsViewController : LastFMDataProviderDelegate {
   
 }
 
+// MARK: - MKMapViewDelegate
 extension EventsViewController : MKMapViewDelegate {
+  
+  func mapViewDidFinishLoadingMap(mapView: MKMapView!) {
+    NSOperationQueue().addOperationWithBlock({
+      let mapBoundsWidth = Double(self.mapView.bounds.size.width)
+      let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
+      let scale:Double = mapBoundsWidth / mapRectWidth
+      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale:scale)
+      self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mapView)
+    })
+  }
   
   func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
     NSOperationQueue().addOperationWithBlock({
