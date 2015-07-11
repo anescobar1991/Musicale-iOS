@@ -29,9 +29,10 @@ class MoreOptionsTableViewController : UITableViewController {
     if let place = persistentData.searchPlace {
       searchLocation.text = sanitizePlaceToDisplay(place)
     } else {
-      let location = persistentData.searchLocation
+      if let location = persistentData.searchLocation {
+        Geocoder().reverseGeocode(location, delegate: self)
+      }
       
-      Geocoder().reverseGeocode(location!, delegate: self)
     }
   }
   
