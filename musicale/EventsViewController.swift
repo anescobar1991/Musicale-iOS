@@ -109,6 +109,7 @@ class EventsViewController : UIViewController {
         pins.append(pin)
       }
       clusteringManager.addAnnotations(pins)
+      displayClustersAndPinsOnMap()
       eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
       eventsTableView.backgroundView = nil
     }
@@ -237,23 +238,11 @@ extension EventsViewController : LastFMDataProviderDelegate {
 extension EventsViewController : MKMapViewDelegate {
   
   func mapViewDidFinishLoadingMap(mapView: MKMapView!) {
-    NSOperationQueue().addOperationWithBlock({
-      let mapBoundsWidth = Double(self.mapView.bounds.size.width)
-      let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
-      let scale:Double = mapBoundsWidth / mapRectWidth
-      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale:scale)
-      self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mapView)
-    })
+    displayClustersAndPinsOnMap()
   }
   
   func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-    NSOperationQueue().addOperationWithBlock({
-      let mapBoundsWidth = Double(self.mapView.bounds.size.width)
-      let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
-      let scale:Double = mapBoundsWidth / mapRectWidth
-      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale:scale)
-      self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mapView)
-    })
+    displayClustersAndPinsOnMap()
   }
   
   func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -271,4 +260,15 @@ extension EventsViewController : MKMapViewDelegate {
       return pinView
     }
   }
+  
+  private func displayClustersAndPinsOnMap() {
+    NSOperationQueue().addOperationWithBlock({
+      let mapBoundsWidth = Double(self.mapView.bounds.size.width)
+      let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
+      let scale:Double = mapBoundsWidth / mapRectWidth
+      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale:scale)
+      self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mapView)
+    })
+  }
+  
 }
