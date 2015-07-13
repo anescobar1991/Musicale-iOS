@@ -22,8 +22,8 @@ class EventsViewController : UIViewController {
   private var dataManager = PersistentDataManager.sharedInstance
   private var clusteringManager = FBClusteringManager()
   
-  @IBOutlet weak var mapView: MKMapView!
-  @IBOutlet weak var eventsTableView: UITableView!
+  @IBOutlet private weak var mapView: MKMapView!
+  @IBOutlet private weak var eventsTableView: UITableView!
   
   override func viewDidLoad() {
       
@@ -238,10 +238,6 @@ extension EventsViewController : LastFMDataProviderDelegate {
 extension EventsViewController : MKMapViewDelegate {
   
   func mapViewDidFinishLoadingMap(mapView: MKMapView!) {
-    displayClustersAndPinsOnMap()
-  }
-  
-  func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
     displayClustersAndPinsOnMap()
   }
   

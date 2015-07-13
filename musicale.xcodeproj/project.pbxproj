@@ -24,6 +24,7 @@
 		412CEB251B4CC19D00CEE159 /* FBQuadTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB241B4CC19D00CEE159 /* FBQuadTreeNode.swift */; };
 		412CEB271B4CC1A300CEE159 /* FBBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CEB261B4CC1A300CEE159 /* FBBoundingBox.swift */; };
 		415666981B40EFF300C102CB /* define_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 415666971B40EFF300C102CB /* define_location.png */; };
+		416C30C21B5371AA00DCC2CA /* EventsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C30C11B5371AA00DCC2CA /* EventsMapViewController.swift */; };
 		417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417090FD1AD9B89A0095A7BB /* AppDelegate.swift */; };
 		417091031AD9B89A0095A7BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 417091011AD9B89A0095A7BB /* Main.storyboard */; };
 		417091051AD9B89A0095A7BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 417091041AD9B89A0095A7BB /* Images.xcassets */; };
@@ -62,6 +63,7 @@
 		412CEB241B4CC19D00CEE159 /* FBQuadTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBQuadTreeNode.swift; sourceTree = "<group>"; };
 		412CEB261B4CC1A300CEE159 /* FBBoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBBoundingBox.swift; sourceTree = "<group>"; };
 		415666971B40EFF300C102CB /* define_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = define_location.png; sourceTree = "<group>"; };
+		416C30C11B5371AA00DCC2CA /* EventsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsMapViewController.swift; sourceTree = "<group>"; };
 		417090F81AD9B89A0095A7BB /* musicale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musicale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417090FC1AD9B89A0095A7BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		417090FD1AD9B89A0095A7BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		41128A871B1FDABD00366DFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				416C30C11B5371AA00DCC2CA /* EventsMapViewController.swift */,
 				412CEB111B478D7600CEE159 /* EventsViewController.swift */,
 				41128A911B22A37800366DFB /* LocationChangeTableViewController.swift */,
 				41128A931B236CE900366DFB /* MoreOptionsTableViewController.swift */,
@@ -400,6 +403,7 @@
 				417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */,
 				412CEB251B4CC19D00CEE159 /* FBQuadTreeNode.swift in Sources */,
 				412CEB271B4CC1A300CEE159 /* FBBoundingBox.swift in Sources */,
+				416C30C21B5371AA00DCC2CA /* EventsMapViewController.swift in Sources */,
 				412CEB231B4CC19000CEE159 /* FBQuadTree.swift in Sources */,
 				417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */,
 				41128A8C1B1FE37700366DFB /* PersistentDataManager.swift in Sources */,

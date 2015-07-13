@@ -13,7 +13,7 @@ class MoreOptionsTableViewController : UITableViewController {
   
   let persistentData = PersistentDataManager.sharedInstance
 
-  @IBOutlet weak var searchLocation: UILabel!
+  @IBOutlet private weak var searchLocation: UILabel!
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)

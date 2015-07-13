@@ -17,11 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBA-V2-yrI">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBA-V2-yrI">
                                 <rect key="frame" x="0.0" y="64" width="600" height="150"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="joe-Ai-bUk"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ViR-xF-AHH" appends="YES" id="PKl-9j-4Mx"/>
+                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iSI-TP-YUm">
                                 <rect key="frame" x="0.0" y="214" width="600" height="10"/>
@@ -121,8 +125,32 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXi-fu-C2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ViR-xF-AHH">
+                    <connections>
+                        <segue destination="z0y-Bv-Fad" kind="show" id="EvK-yI-wts"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2765" y="-1634"/>
+        </scene>
+        <!--Shows-->
+        <scene sceneID="9rP-dq-rfF">
+            <objects>
+                <viewController id="7f5-xW-aeJ" customClass="EventsMapViewController" customModule="musicale" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w2B-8p-nJi"/>
+                        <viewControllerLayoutGuide type="bottom" id="q8U-7L-6Xj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Do5-QF-aOi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Shows" id="JVl-d6-GFu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P20-d8-GAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4468" y="-1634"/>
         </scene>
         <!--Venues in the area-->
         <scene sceneID="OCH-5e-6eu">
@@ -480,6 +508,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3g9-4B-XFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3742" y="1112"/>
+        </scene>
+        <!--Shows-->
+        <scene sceneID="pqZ-HQ-cgC">
+            <objects>
+                <navigationController title="Shows" automaticallyAdjustsScrollViewInsets="NO" id="z0y-Bv-Fad" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ltz-hj-noZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7f5-xW-aeJ" kind="relationship" relationship="rootViewController" id="6Cg-no-Jlt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zho-q9-T5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3592" y="-1634"/>
         </scene>
     </scenes>
     <resources>

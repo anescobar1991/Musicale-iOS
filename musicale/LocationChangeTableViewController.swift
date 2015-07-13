@@ -11,9 +11,9 @@ import CoreLocation
 
 class LocationChangeTableViewController : UIViewController {
   
-  @IBOutlet weak var searchBar: UISearchBar!
-  @IBOutlet weak var locationsTableView: UITableView!
-  @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var searchBar: UISearchBar!
+  @IBOutlet private weak var locationsTableView: UITableView!
+  @IBOutlet private weak var tableViewBottomConstraint: NSLayoutConstraint!
   
   private var messageLabel = UILabel()
   private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
