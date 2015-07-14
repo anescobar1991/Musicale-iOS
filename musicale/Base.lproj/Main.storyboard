@@ -144,13 +144,27 @@
                     <view key="view" contentMode="scaleToFill" id="Do5-QF-aOi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeE-PN-KVS">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DeE-PN-KVS" firstAttribute="top" secondItem="w2B-8p-nJi" secondAttribute="bottom" id="55s-tW-aw1"/>
+                            <constraint firstItem="q8U-7L-6Xj" firstAttribute="top" secondItem="DeE-PN-KVS" secondAttribute="bottom" id="VIU-EF-DYX"/>
+                            <constraint firstAttribute="trailing" secondItem="DeE-PN-KVS" secondAttribute="trailing" id="Yh4-MP-d7O"/>
+                            <constraint firstItem="DeE-PN-KVS" firstAttribute="leading" secondItem="Do5-QF-aOi" secondAttribute="leading" id="fu6-hC-0QT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shows" id="JVl-d6-GFu"/>
+                    <connections>
+                        <outlet property="mapView" destination="DeE-PN-KVS" id="QA9-HQ-jIB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P20-d8-GAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4468" y="-1634"/>
+            <point key="canvasLocation" x="4404" y="-1634"/>
         </scene>
         <!--Venues in the area-->
         <scene sceneID="OCH-5e-6eu">
