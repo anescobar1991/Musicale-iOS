@@ -1,31 +1,26 @@
-//
-//  Geocoder.swift
-//  musicale
-//
-//  Created by Andres Escobar on 7/5/15.
-//  Copyright (c) 2015 Andres Escobar. All rights reserved.
-//
-
 import CoreLocation
+
 
 protocol ReverseGeocoderDelegate {
   func aboutToReverseGeocode()
-  func didGetReverseGeocodedPlacemark(placemarks :[CLPlacemark])
-  func reserveGeocodingDidFailWithErrors(error : NSError)
+  func didGetReverseGeocodedPlacemark(placemarks: [CLPlacemark])
+  func reserveGeocodingDidFailWithErrors(error: NSError)
 }
+
 
 protocol ForwardGeocoderDelegate {
   func aboutToForwardGeocode()
-  func didGetForwardGeocodedPlacemark(placemarks :[CLPlacemark])
-  func forwardGeocodingDidFailWithErrors(error : NSError)
+  func didGetForwardGeocodedPlacemark(placemarks: [CLPlacemark])
+  func forwardGeocodingDidFailWithErrors(error: NSError)
 }
+
 
 class Geocoder {
   private var geocoder = CLGeocoder()
-  private var reverseGeocoderDelegate :ReverseGeocoderDelegate!
-  private var forwardGeocoderDelegate :ForwardGeocoderDelegate!
+  private var reverseGeocoderDelegate: ReverseGeocoderDelegate!
+  private var forwardGeocoderDelegate: ForwardGeocoderDelegate!
   
-  func reverseGeocode(location :CLLocation, delegate :ReverseGeocoderDelegate) {
+  func reverseGeocode(location: CLLocation, delegate: ReverseGeocoderDelegate) {
     self.reverseGeocoderDelegate = delegate
 
     geocoder.reverseGeocodeLocation(location, completionHandler:
@@ -43,7 +38,7 @@ class Geocoder {
     })
   }
   
-  func forwardGeocode(address :String, delegate :ForwardGeocoderDelegate) {
+  func forwardGeocode(address: String, delegate: ForwardGeocoderDelegate) {
     self.forwardGeocoderDelegate = delegate
     
     geocoder.geocodeAddressString(address, completionHandler:

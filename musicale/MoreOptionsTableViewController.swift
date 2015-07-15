@@ -1,17 +1,10 @@
-//
-//  MoreOptionsTableViewController.swift
-//  musicale
-//
-//  Created by Andres Escobar on 6/6/15.
-//  Copyright (c) 2015 Andres Escobar. All rights reserved.
-//
-
 import UIKit
 import CoreLocation
 
-class MoreOptionsTableViewController : UITableViewController {
+
+class MoreOptionsTableViewController: UITableViewController {
   
-  let persistentData = PersistentDataManager.sharedInstance
+  private let persistentData = PersistentDataManager.sharedInstance
 
   @IBOutlet private weak var searchLocation: UILabel!
   
@@ -49,7 +42,7 @@ class MoreOptionsTableViewController : UITableViewController {
     return sanitizedPlaceString
   }
 
-// MARK: - Table view data source
+
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
@@ -60,7 +53,7 @@ class MoreOptionsTableViewController : UITableViewController {
   
 }
 
-extension MoreOptionsTableViewController : ReverseGeocoderDelegate {
+extension MoreOptionsTableViewController: ReverseGeocoderDelegate {
   
   func aboutToReverseGeocode() {}
   
@@ -70,7 +63,7 @@ extension MoreOptionsTableViewController : ReverseGeocoderDelegate {
     searchLocation.text = sanitizePlaceToDisplay(place)
   }
   
-  func reserveGeocodingDidFailWithErrors(error : NSError) {
+  func reserveGeocodingDidFailWithErrors(error: NSError) {
     searchLocation.text = ""
   }
   

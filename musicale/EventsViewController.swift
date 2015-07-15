@@ -1,26 +1,19 @@
-//
-//  EventsViewController.swift
-//  musicale
-//
-//  Created by Andres Escobar on 4/18/15.
-//  Copyright (c) 2015 Andres Escobar. All rights reserved.
-//
-
 import UIKit
 import CoreLocation
 import MapKit
 import Kingfisher
 
-class EventsViewController : UIViewController {
+
+class EventsViewController: UIViewController {
   
-  private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-  private var messageLabel = UILabel()
-  private var refreshControl = UIRefreshControl()
+  private let progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+  private let messageLabel = UILabel()
+  private let refreshControl = UIRefreshControl()
   
-  private var locationManager = UserLocationManager()
+  private let locationManager = UserLocationManager()
   private var lastFmDataProvider :LastFmDataProvider!
-  private var dataManager = PersistentDataManager.sharedInstance
-  private var clusteringManager = FBClusteringManager()
+  private let dataManager = PersistentDataManager.sharedInstance
+  private let clusteringManager = FBClusteringManager()
   
   @IBOutlet private weak var mapView: MKMapView!
   @IBOutlet private weak var eventsTableView: UITableView!
@@ -39,7 +32,7 @@ class EventsViewController : UIViewController {
     
     if let searchLocation = dataManager.searchLocation {
       setMapCenterCoordinates(searchLocation)
-
+      
       if (dataManager.getEvents().isEmpty) {
         eventsTableView.reloadData()
         lastFmDataProvider.getEvents(searchLocation.coordinate)
@@ -51,7 +44,7 @@ class EventsViewController : UIViewController {
     }
   }
   
-  func refreshData(sender:AnyObject) {
+  func refreshData(sender: AnyObject) {
     dataManager.eventResultsPage = 0
     dataManager.clearEvents()
     eventsTableView.reloadData()
@@ -127,8 +120,8 @@ class EventsViewController : UIViewController {
 
 }
 
-// MARK: - UITableViewDataSource
-extension EventsViewController : UITableViewDataSource {
+
+extension EventsViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as!EventTableViewCell
@@ -160,8 +153,8 @@ extension EventsViewController : UITableViewDataSource {
   
 }
 
-// MARK: - UserLocationManagerDelegate
-extension EventsViewController : UserLocationManagerDelegate {
+
+extension EventsViewController: UserLocationManagerDelegate {
   
   func aboutToGetLocation() {}
   
@@ -201,8 +194,8 @@ extension EventsViewController : UserLocationManagerDelegate {
   
 }
 
-// MARK: - LastFMDataProviderDelegate
-extension EventsViewController : LastFMDataProviderDelegate {
+
+extension EventsViewController: LastFMDataProviderDelegate {
   
   func aboutToGetEvents() {
     if (!refreshControl.refreshing) {
@@ -210,7 +203,7 @@ extension EventsViewController : LastFMDataProviderDelegate {
     }
   }
   
-  func didGetEvents(foundEvents :[Event]) {
+  func didGetEvents(foundEvents: [Event]) {
     dataManager.addToEvents(foundEvents)
     displayProgressBar(false)
     
@@ -234,10 +227,14 @@ extension EventsViewController : LastFMDataProviderDelegate {
   
 }
 
-// MARK: - MKMapViewDelegate
-extension EventsViewController : MKMapViewDelegate {
+
+extension EventsViewController: MKMapViewDelegate {
   
   func mapViewDidFinishLoadingMap(mapView: MKMapView!) {
+    displayClustersAndPinsOnMap()
+  }
+  
+  func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
     displayClustersAndPinsOnMap()
   }
   
@@ -252,7 +249,7 @@ extension EventsViewController : MKMapViewDelegate {
       reuseId = "Pin"
       var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
       pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-      pinView!.pinColor = .Green
+
       return pinView
     }
   }

@@ -94,7 +94,7 @@ class FBAnnotationClusterView : MKAnnotationView {
         image = imageAsset
         centerOffset = CGPointZero
         
-        // adds a white border around the green circle
+        // adds a white border around the blue circle
         layer.borderColor = UIColor.whiteColor().CGColor
         layer.borderWidth = borderWidth
         layer.cornerRadius = self.bounds.size.width / 2

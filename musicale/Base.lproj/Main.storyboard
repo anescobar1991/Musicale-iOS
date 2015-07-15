@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBA-V2-yrI">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBA-V2-yrI">
                                 <rect key="frame" x="0.0" y="64" width="600" height="150"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -133,7 +133,7 @@
             </objects>
             <point key="canvasLocation" x="2765" y="-1634"/>
         </scene>
-        <!--Shows-->
+        <!--Shows in the area-->
         <scene sceneID="9rP-dq-rfF">
             <objects>
                 <viewController id="7f5-xW-aeJ" customClass="EventsMapViewController" customModule="musicale" customModuleProvider="target" sceneMemberID="viewController">
@@ -157,7 +157,7 @@
                             <constraint firstItem="DeE-PN-KVS" firstAttribute="leading" secondItem="Do5-QF-aOi" secondAttribute="leading" id="fu6-hC-0QT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Shows" id="JVl-d6-GFu"/>
+                    <navigationItem key="navigationItem" title="Shows in the area" id="JVl-d6-GFu"/>
                     <connections>
                         <outlet property="mapView" destination="DeE-PN-KVS" id="QA9-HQ-jIB"/>
                     </connections>
@@ -523,10 +523,10 @@
             </objects>
             <point key="canvasLocation" x="3742" y="1112"/>
         </scene>
-        <!--Shows-->
+        <!--Shows in the area-->
         <scene sceneID="pqZ-HQ-cgC">
             <objects>
-                <navigationController title="Shows" automaticallyAdjustsScrollViewInsets="NO" id="z0y-Bv-Fad" sceneMemberID="viewController">
+                <navigationController title="Shows in the area" automaticallyAdjustsScrollViewInsets="NO" id="z0y-Bv-Fad" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ltz-hj-noZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

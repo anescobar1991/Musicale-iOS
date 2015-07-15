@@ -1,11 +1,5 @@
-//
-//  Event.swift
-//  musicale
-//
-//  Created by Andres Escobar on 4/14/15.
-//  Copyright (c) 2015 Andres Escobar. All rights reserved.
-//
 import CoreLocation
+
 
 class Event {
   

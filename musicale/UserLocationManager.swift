@@ -1,23 +1,17 @@
-//
-//  LocationManager.swift
-//  musicale
-//
-//  Created by Andres Escobar on 7/4/15.
-//  Copyright (c) 2015 Andres Escobar. All rights reserved.
-//
-
 import CoreLocation
+
 
 protocol UserLocationManagerDelegate {
   func aboutToGetLocation()
-  func didGetLocation(location :CLLocation)
+  func didGetLocation(location: CLLocation)
   func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus)
-  func locationServicesDidFailWithErrors(error : NSError)
+  func locationServicesDidFailWithErrors(error: NSError)
 }
 
-class UserLocationManager : NSObject, CLLocationManagerDelegate {
-  private var locationManager :CLLocationManager = CLLocationManager()
-  private var delegate :UserLocationManagerDelegate!
+
+class UserLocationManager: NSObject, CLLocationManagerDelegate {
+  private let locationManager: CLLocationManager = CLLocationManager()
+  private var delegate: UserLocationManagerDelegate!
   
   override init() {
     super.init()
@@ -26,7 +20,7 @@ class UserLocationManager : NSObject, CLLocationManagerDelegate {
     locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
   }
   
-  func getCurrentLocation(delegate :UserLocationManagerDelegate) {
+  func getCurrentLocation(delegate: UserLocationManagerDelegate) {
     self.delegate = delegate
     
     startUpdatingLocationIfAuthorized(CLLocationManager.authorizationStatus())

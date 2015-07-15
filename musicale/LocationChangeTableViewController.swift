@@ -1,25 +1,18 @@
-//
-//  LocationChangeTableViewController.swift
-//  
-//
-//  Created by Andres Escobar on 6/5/15.
-//
-//
-
 import UIKit
 import CoreLocation
 
-class LocationChangeTableViewController : UIViewController {
+
+class LocationChangeTableViewController: UIViewController {
   
   @IBOutlet private weak var searchBar: UISearchBar!
   @IBOutlet private weak var locationsTableView: UITableView!
   @IBOutlet private weak var tableViewBottomConstraint: NSLayoutConstraint!
   
-  private var messageLabel = UILabel()
-  private var progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+  private let messageLabel = UILabel()
+  private let progressBar = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
   
-  private var locationManager = UserLocationManager()
-  private var dataManager = PersistentDataManager.sharedInstance
+  private let locationManager = UserLocationManager()
+  private let dataManager = PersistentDataManager.sharedInstance
 
   private var places: [CLPlacemark] = []
   
@@ -121,8 +114,8 @@ class LocationChangeTableViewController : UIViewController {
   
 }
 
-// MARK: - UISearchBarDelegate
-extension LocationChangeTableViewController : UISearchBarDelegate {
+
+extension LocationChangeTableViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     places.removeAll(keepCapacity: false)
@@ -138,8 +131,8 @@ extension LocationChangeTableViewController : UISearchBarDelegate {
   
 }
 
-// MARK: - UITableViewDataSource
-extension LocationChangeTableViewController : UITableViewDataSource {
+
+extension LocationChangeTableViewController: UITableViewDataSource {
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
@@ -167,8 +160,8 @@ extension LocationChangeTableViewController : UITableViewDataSource {
   
 }
 
-// MARK: - UITableViewDelegate
-extension LocationChangeTableViewController : UITableViewDelegate {
+
+extension LocationChangeTableViewController: UITableViewDelegate {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     dataManager.searchLocation = places[indexPath.row].location
@@ -180,12 +173,12 @@ extension LocationChangeTableViewController : UITableViewDelegate {
   
 }
 
-// MARK: - UserLocationManagerDelegate
-extension LocationChangeTableViewController : UserLocationManagerDelegate {
+
+extension LocationChangeTableViewController: UserLocationManagerDelegate {
   
   func aboutToGetLocation() {}
 
-  func didGetLocation(location :CLLocation) {
+  func didGetLocation(location: CLLocation) {
     dataManager.searchLocation = location
     dataManager.searchPlace = nil
     dataManager.clearEvents()
@@ -219,12 +212,12 @@ extension LocationChangeTableViewController : UserLocationManagerDelegate {
   
 }
 
-// MARK: - UserLocationManagerDelegate
-extension LocationChangeTableViewController : ForwardGeocoderDelegate {
+
+extension LocationChangeTableViewController: ForwardGeocoderDelegate {
   
   func aboutToForwardGeocode() {}
   
-  func didGetForwardGeocodedPlacemark(placemarks :[CLPlacemark]) {
+  func didGetForwardGeocodedPlacemark(placemarks: [CLPlacemark]) {
     displayProgressBar(false)
 
     places.extend(placemarks)
@@ -232,7 +225,7 @@ extension LocationChangeTableViewController : ForwardGeocoderDelegate {
     locationsTableView.reloadData()
   }
   
-  func forwardGeocodingDidFailWithErrors(error : NSError) {
+  func forwardGeocodingDidFailWithErrors(error: NSError) {
     self.displayProgressBar(false)
     
     let errorCode = error.code
