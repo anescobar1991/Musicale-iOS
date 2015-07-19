@@ -32,6 +32,7 @@
 		417FD7E11ADE0A5900D8CB7F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E01ADE0A5900D8CB7F /* Event.swift */; };
 		417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */; };
 		41C42E0D1AE4B55D00D5C537 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C42E0C1AE4B55D00D5C537 /* MapKit.framework */; };
+		41E6A69B1B5B56D600270ED6 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A69A1B5B56D600270ED6 /* AppStrings.swift */; };
 		C11DCE123A1C7B49C0B46DA0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF77A095F4969E9302777FF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		417FD7E01ADE0A5900D8CB7F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		41C42E0C1AE4B55D00D5C537 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		41E6A69A1B5B56D600270ED6 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		6164340EB15E8AE3096DE74E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8AF77A095F4969E9302777FF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77C911B42A4DB44A4E2DB2C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		417090FA1AD9B89A0095A7BB /* musicale */ = {
 			isa = PBXGroup;
 			children = (
+				41E6A6991B5B4F1300270ED6 /* Resources */,
 				412CEB191B4CC12500CEE159 /* FBAnnotationClustering */,
 				41128A881B1FDBEA00366DFB /* API */,
 				41128A871B1FDABD00366DFB /* Controllers */,
@@ -224,6 +227,14 @@
 				417FD7E01ADE0A5900D8CB7F /* Event.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		41E6A6991B5B4F1300270ED6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				41E6A69A1B5B56D600270ED6 /* AppStrings.swift */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		C49AD089B022FB1330C18F4F /* Frameworks */ = {
@@ -404,6 +415,7 @@
 				412CEB251B4CC19D00CEE159 /* FBQuadTreeNode.swift in Sources */,
 				412CEB271B4CC1A300CEE159 /* FBBoundingBox.swift in Sources */,
 				416C30C21B5371AA00DCC2CA /* EventsMapViewController.swift in Sources */,
+				41E6A69B1B5B56D600270ED6 /* AppStrings.swift in Sources */,
 				412CEB231B4CC19000CEE159 /* FBQuadTree.swift in Sources */,
 				417090FE1AD9B89A0095A7BB /* AppDelegate.swift in Sources */,
 				41128A8C1B1FE37700366DFB /* PersistentDataManager.swift in Sources */,

@@ -92,20 +92,11 @@ class EventsViewController: UIViewController {
     mapView.removeAnnotations(mapView.annotations)
     clusteringManager.setAnnotations([])
     
-    if (dataManager.getEvents().isEmpty) {
-      setTableViewMessageLabel("Bummer! There are no shows in this area. Try searching elsewhere.")
-    } else {
-      var pins :[FBAnnotation] = []
-      for event in dataManager.getEvents() {
-        let pin = FBAnnotation()
-        pin.coordinate = event.latLng
-        pins.append(pin)
-      }
-      clusteringManager.addAnnotations(pins)
-      displayClustersAndPinsOnMap()
-      eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-      eventsTableView.backgroundView = nil
-    }
+    let pins = getAnnotationsFromEventList(dataManager.getEvents())
+    clusteringManager.addAnnotations(pins)
+    displayClustersAndPinsOnMap()
+    eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+    eventsTableView.backgroundView = nil
     eventsTableView.reloadData()
   }
   
@@ -116,6 +107,17 @@ class EventsViewController: UIViewController {
         regionRadius, regionRadius)
     
     mapView.setRegion(coordinateRegion, animated: true)
+  }
+  
+  private func getAnnotationsFromEventList(events: [Event]) -> [FBAnnotation] {
+    var pins :[FBAnnotation] = []
+    
+    for event in events {
+      let pin = FBAnnotation()
+      pin.coordinate = event.latLng
+      pins.append(pin)
+    }
+    return pins
   }
 
 }
@@ -168,21 +170,21 @@ extension EventsViewController: UserLocationManagerDelegate {
   }
   
   func locationServicesDidFailWithErrors(error: NSError) {
-    setTableViewMessageLabel("Can't figure out your current location. Do you have airplane mode on?")
+    setTableViewMessageLabel(AppStrings().locationUnresolvableMessage)
   }
   
   func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus) {
     let alertController = UIAlertController(
-      title: "Location Access Disabled",
-      message: "To find shows near you we need to know where you are! Open Musicale's settings and set location access to 'While Using the App.'",
+      title: AppStrings().locationAccessDisabledAlertViewTitle,
+      message: AppStrings().locationAccessDisabledAlertViewMessage,
       preferredStyle: .Alert)
     
-    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-      self.setTableViewMessageLabel("Can't get shows around you without knowing where you are. You can still set a location on the 'Change location' screen though!")
+    let cancelAction = UIAlertAction(title: AppStrings().alertViewCancel, style: .Cancel) { (action) in
+      self.setTableViewMessageLabel(AppStrings().locationServicesDisabledMessage)
     }
     alertController.addAction(cancelAction)
     
-    let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+    let openAction = UIAlertAction(title: AppStrings().locationAccessDisabledOpenSettingsButton, style: .Default) { (action) in
       if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
         UIApplication.sharedApplication().openURL(url)
       }
@@ -217,11 +219,11 @@ extension EventsViewController: LastFMDataProviderDelegate {
     displayProgressBar(false)
 
     if (error.code == -1009 && dataManager.eventResultsPage > 1) {
-      setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
+      setTableViewMessageLabel(AppStrings().networkUnavailableMessage)
     } else if (error.code == 8) {
-      setTableViewMessageLabel("No events found in your area. Try searching elsewhere.")
+      setTableViewMessageLabel(AppStrings().noShowsInAreaMessage)
     } else {
-      setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
+      setTableViewMessageLabel(AppStrings().genericErrorMessage)
     }
   }
   

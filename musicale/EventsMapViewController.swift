@@ -11,24 +11,17 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     mapView.delegate = self
-    
-    clusteringManager.setAnnotations([])
-    
+        
     if let location = dataManager.searchLocation {
       setMapCenterCoordinates(location)
     }
-    
   }
   
   override func viewDidAppear(animated: Bool) {
     clusteringManager.setAnnotations([])
     
-    var pins :[FBAnnotation] = []
-    for event in dataManager.getEvents() {
-      let pin = FBAnnotation()
-      pin.coordinate = event.latLng
-      pins.append(pin)
-    }
+    let pins = getAnnotationsFromEventList(dataManager.getEvents())
+    
     clusteringManager.addAnnotations(pins)
     displayClustersAndPinsOnMap()
   }
@@ -70,6 +63,17 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
       regionRadius, regionRadius)
     
     mapView.setRegion(coordinateRegion, animated: false)
+  }
+  
+  private func getAnnotationsFromEventList(events: [Event]) -> [FBAnnotation] {
+    var pins :[FBAnnotation] = []
+    
+    for event in events {
+      let pin = FBAnnotation()
+      pin.coordinate = event.latLng
+      pins.append(pin)
+    }
+    return pins
   }
   
 }

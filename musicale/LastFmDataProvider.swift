@@ -13,7 +13,8 @@ protocol LastFMDataProviderDelegate {
 class LastFmDataProvider {
   private let delegate: LastFMDataProviderDelegate
   private let apiKey = "824f19ce3c166a10c7b9858e3dfc3235"
-
+  private let lasFmHostName = "http://ws.audioscrobbler.com/2.0/"
+  
   init(delegate: LastFMDataProviderDelegate) {
     self.delegate = delegate
   }
@@ -21,7 +22,7 @@ class LastFmDataProvider {
   func getEvents(latLng: CLLocationCoordinate2D, pageNumber: Int = 1, resultsLimit: Int = 25, searchRadius: Int = 100) {
     delegate.aboutToGetEvents()
     
-    Alamofire.request(.GET, "http://ws.audioscrobbler.com/2.0/", parameters: ["method": "geo.getevents", "lat": latLng.latitude, "long": latLng.longitude, "api_key": apiKey, "format": "json", "page": pageNumber, "limit": resultsLimit, "distance": searchRadius])
+    Alamofire.request(.GET, lasFmHostName, parameters: ["method": "geo.getevents", "lat": latLng.latitude, "long": latLng.longitude, "api_key": apiKey, "format": "json", "page": pageNumber, "limit": resultsLimit, "distance": searchRadius])
       .responseJSON { (request, response, data, error) in
         if let error = error {
           self.delegate.didGetEventsWithError(error)
@@ -58,6 +59,7 @@ class LastFmDataProvider {
   private func createEventModelFromJSON(json: SwiftyJSON.JSON) -> Event {
     let title = json["title"].string
     var date = json["startDate"].string
+    //range for creating substring with the part of the start date we want
     let range = Range(start:advance(date!.startIndex, 4), end: advance(date!.startIndex, 16))
     date = date?.substringWithRange(range)
     

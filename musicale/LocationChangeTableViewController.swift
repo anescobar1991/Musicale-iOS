@@ -188,19 +188,19 @@ extension LocationChangeTableViewController: UserLocationManagerDelegate {
   
   
   func locationServicesDidFailWithErrors(error: NSError) {
-    setTableViewMessageLabel("Can't figure out your current location. Do you have airplane mode on?")
+    setTableViewMessageLabel(AppStrings().locationUnresolvableMessage)
   }
   
   func doesNotHaveLocationServicesAuthorization(status: CLAuthorizationStatus) {
     let alertController = UIAlertController(
-      title: "Location Access Disabled",
-      message: "Can't get your location without your permission. Open Musicale's settings and set location access to 'While Using the App.'",
+      title: AppStrings().locationAccessDisabledAlertViewTitle,
+      message: AppStrings().locationAccessDisabledAlertViewMessage,
       preferredStyle: .Alert)
     
-    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+    let cancelAction = UIAlertAction(title: AppStrings().alertViewCancel, style: .Cancel, handler: nil)
       alertController.addAction(cancelAction)
     
-    let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+    let openAction = UIAlertAction(title: AppStrings().locationAccessDisabledOpenSettingsButton, style: .Default) { (action) in
       if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
         UIApplication.sharedApplication().openURL(url)
       }
@@ -231,11 +231,11 @@ extension LocationChangeTableViewController: ForwardGeocoderDelegate {
     let errorCode = error.code
     
     if (errorCode == CLError.GeocodeFoundNoResult.rawValue || errorCode == CLError.GeocodeFoundPartialResult.rawValue) {
-      setTableViewMessageLabel("No locations found for your search.")
+      setTableViewMessageLabel(AppStrings().noLocationFoundMessage)
     } else if (errorCode == CLError.Network.rawValue) {
-      setTableViewMessageLabel("No internet connection found. Are you connected to a network?")
+      setTableViewMessageLabel(AppStrings().networkUnavailableMessage)
     } else {
-      setTableViewMessageLabel("Oops! This one is on us, something has gone wrong. Try searching again.")
+      setTableViewMessageLabel(AppStrings().genericErrorMessage)
     }
   }
   
