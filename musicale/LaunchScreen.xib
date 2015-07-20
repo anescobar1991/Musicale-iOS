@@ -9,10 +9,26 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_musicale_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Ym-D9-yJl">
+                    <rect key="frame" x="160" y="155" width="160" height="160"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="Vcd-LX-gP2"/>
+                        <constraint firstAttribute="height" constant="160" id="bjo-Ca-8Nw"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="5Ym-D9-yJl" secondAttribute="centerY" constant="5" id="mIa-EC-5P5"/>
+                <constraint firstAttribute="centerX" secondItem="5Ym-D9-yJl" secondAttribute="centerX" id="reU-Jl-wE4"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="404" y="445"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_musicale_logo.png" width="144" height="144"/>
+    </resources>
 </document>
