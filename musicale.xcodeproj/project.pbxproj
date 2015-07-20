@@ -33,6 +33,7 @@
 		417FD7E91ADE17E600D8CB7F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */; };
 		41C42E0D1AE4B55D00D5C537 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C42E0C1AE4B55D00D5C537 /* MapKit.framework */; };
 		41E6A69B1B5B56D600270ED6 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A69A1B5B56D600270ED6 /* AppStrings.swift */; };
+		41E6A69D1B5CAA4E00270ED6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */; };
 		C11DCE123A1C7B49C0B46DA0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF77A095F4969E9302777FF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		417FD7E81ADE17E600D8CB7F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		41C42E0C1AE4B55D00D5C537 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		41E6A69A1B5B56D600270ED6 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
+		41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		6164340EB15E8AE3096DE74E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8AF77A095F4969E9302777FF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77C911B42A4DB44A4E2DB2C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				417FD7DF1ADE053D00D8CB7F /* Models */,
 				417090FD1AD9B89A0095A7BB /* AppDelegate.swift */,
 				417091011AD9B89A0095A7BB /* Main.storyboard */,
+				41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */,
 				417091041AD9B89A0095A7BB /* Images.xcassets */,
 				417090FB1AD9B89A0095A7BB /* Supporting Files */,
 				41128A991B27F20300366DFB /* .gitignore */,
@@ -338,6 +341,7 @@
 				412CEB181B4CB1A100CEE159 /* placeholder.png in Resources */,
 				41128A9A1B27F20300366DFB /* .gitignore in Resources */,
 				417091031AD9B89A0095A7BB /* Main.storyboard in Resources */,
+				41E6A69D1B5CAA4E00270ED6 /* LaunchScreen.xib in Resources */,
 				417091051AD9B89A0095A7BB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
