@@ -10,18 +10,28 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_musicale_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Ym-D9-yJl">
-                    <rect key="frame" x="160" y="155" width="160" height="160"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="musicale_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Ym-D9-yJl">
+                    <rect key="frame" x="150" y="145" width="180" height="180"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="160" id="Vcd-LX-gP2"/>
-                        <constraint firstAttribute="height" constant="160" id="bjo-Ca-8Nw"/>
+                        <constraint firstAttribute="width" constant="180" id="Vcd-LX-gP2"/>
+                        <constraint firstAttribute="height" constant="180" id="bjo-Ca-8Nw"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Copyright © 2015 Andres Escobar. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQe-0f-ZEg">
+                    <rect key="frame" x="16" y="443" width="448" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="0.3411764706" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="jQe-0f-ZEg" secondAttribute="bottom" constant="16" id="MgJ-EN-Z4g"/>
+                <constraint firstAttribute="trailing" secondItem="jQe-0f-ZEg" secondAttribute="trailing" constant="16" id="Q6p-iA-Bwo"/>
+                <constraint firstItem="jQe-0f-ZEg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="l4I-vr-4hh"/>
                 <constraint firstAttribute="centerY" secondItem="5Ym-D9-yJl" secondAttribute="centerY" constant="5" id="mIa-EC-5P5"/>
                 <constraint firstAttribute="centerX" secondItem="5Ym-D9-yJl" secondAttribute="centerX" id="reU-Jl-wE4"/>
+                <constraint firstItem="jQe-0f-ZEg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5Ym-D9-yJl" secondAttribute="bottom" constant="32" id="zWG-Dx-H2J"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -29,6 +39,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_musicale_logo.png" width="144" height="144"/>
+        <image name="musicale_logo.png" width="144" height="144"/>
     </resources>
 </document>

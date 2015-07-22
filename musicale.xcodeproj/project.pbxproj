@@ -34,7 +34,7 @@
 		41C42E0D1AE4B55D00D5C537 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C42E0C1AE4B55D00D5C537 /* MapKit.framework */; };
 		41E6A69B1B5B56D600270ED6 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A69A1B5B56D600270ED6 /* AppStrings.swift */; };
 		41E6A69D1B5CAA4E00270ED6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */; };
-		41E6A69F1B5CB18200270ED6 /* ic_musicale_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 41E6A69E1B5CB18200270ED6 /* ic_musicale_logo.png */; };
+		41E6A69F1B5CB18200270ED6 /* musicale_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 41E6A69E1B5CB18200270ED6 /* musicale_logo.png */; };
 		C11DCE123A1C7B49C0B46DA0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF77A095F4969E9302777FF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -80,7 +80,7 @@
 		41C42E0C1AE4B55D00D5C537 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		41E6A69A1B5B56D600270ED6 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		41E6A69E1B5CB18200270ED6 /* ic_musicale_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_musicale_logo.png; sourceTree = "<group>"; };
+		41E6A69E1B5CB18200270ED6 /* musicale_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicale_logo.png; sourceTree = "<group>"; };
 		6164340EB15E8AE3096DE74E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8AF77A095F4969E9302777FF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77C911B42A4DB44A4E2DB2C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		417090FB1AD9B89A0095A7BB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				41E6A69E1B5CB18200270ED6 /* ic_musicale_logo.png */,
+				41E6A69E1B5CB18200270ED6 /* musicale_logo.png */,
 				412CEB171B4CB1A100CEE159 /* placeholder.png */,
 				415666971B40EFF300C102CB /* define_location.png */,
 				417090FC1AD9B89A0095A7BB /* Info.plist */,
@@ -342,7 +342,7 @@
 			files = (
 				415666981B40EFF300C102CB /* define_location.png in Resources */,
 				412CEB181B4CB1A100CEE159 /* placeholder.png in Resources */,
-				41E6A69F1B5CB18200270ED6 /* ic_musicale_logo.png in Resources */,
+				41E6A69F1B5CB18200270ED6 /* musicale_logo.png in Resources */,
 				41128A9A1B27F20300366DFB /* .gitignore in Resources */,
 				417091031AD9B89A0095A7BB /* Main.storyboard in Resources */,
 				41E6A69D1B5CAA4E00270ED6 /* LaunchScreen.xib in Resources */,
