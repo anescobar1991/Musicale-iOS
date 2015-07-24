@@ -236,10 +236,6 @@ extension EventsViewController: MKMapViewDelegate {
     displayClustersAndPinsOnMap()
   }
   
-  func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-    displayClustersAndPinsOnMap()
-  }
-  
   func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
     var reuseId = ""
     if annotation.isKindOfClass(FBAnnotationCluster) {
