@@ -1,12 +1,13 @@
 import UIKit
 import MapKit
 
-
 class EventsMapViewController: UIViewController, MKMapViewDelegate {
   @IBOutlet private weak var mapView: MKMapView!
   
   private let clusteringManager = FBClusteringManager()
   private let dataManager = PersistentDataManager.sharedInstance
+  
+  private var eventLocations = Set<FBAnnotation>()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,8 +22,8 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
     clusteringManager.setAnnotations([])
     
     let pins = getAnnotationsFromEventList(dataManager.getEvents())
-    
     clusteringManager.addAnnotations(pins)
+    
     displayClustersAndPinsOnMap()
   }
   
@@ -49,9 +50,9 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
   private func displayClustersAndPinsOnMap() {
     NSOperationQueue().addOperationWithBlock({
       let mapBoundsWidth = Double(self.mapView.bounds.size.width)
-      let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
+      let mapRectWidth: Double = self.mapView.visibleMapRect.size.width
       let scale:Double = mapBoundsWidth / mapRectWidth
-      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale:scale)
+      let annotationArray = self.clusteringManager.clusteredAnnotationsWithinMapRect(self.mapView.visibleMapRect, withZoomScale: scale)
       self.clusteringManager.displayAnnotations(annotationArray, onMapView:self.mapView)
     })
   }
@@ -71,6 +72,19 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
     for event in events {
       let pin = FBAnnotation()
       pin.coordinate = event.latLng
+      
+      //if pin's coordinates already exist on map (multiple events at same venue) then will place pin at slightly different location
+      if eventLocations.contains(pin) {
+        let lat = Double(pin.coordinate.latitude)
+        let lng = Double(pin.coordinate.longitude)
+        let newLat = lat * (Double.random() * (1.000001 - 0.9999999) + 0.9999999)
+        let newLng = lng * (Double.random() * (1.000001 - 0.9999999) + 0.9999999)
+        let newCoordinate = CLLocationCoordinate2D(latitude: newLat, longitude: newLng)
+        pin.coordinate = newCoordinate
+      }
+
+      //add pin's coordinates to variable that keeps track of all coordinates to be placed on map
+      eventLocations.insert(pin)
       pins.append(pin)
     }
     return pins

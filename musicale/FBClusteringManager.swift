@@ -54,11 +54,7 @@ class FBClusteringManager : NSObject {
         
         
         let cellSize:CGFloat = FBClusteringManager.FBCellSizeForZoomScale(MKZoomScale(zoomScale))
-        
-//        if delegate?.respondsToSelector("cellSizeFactorForCoordinator:") {
-//            cellSize *= delegate.cellSizeFactorForCoordinator(self)
-//        }
-        
+
         let scaleFactor:Double = zoomScale / Double(cellSize)
         
         let minX:Int = Int(floor(MKMapRectGetMinX(rect) * scaleFactor))
@@ -97,21 +93,23 @@ class FBClusteringManager : NSObject {
                 if count == 1 {
                     clusteredAnnotations += annotations
                 }
-                
+              
+              let zoomLevel = FBClusteringManager.FBZoomScaleToZoomLevel(MKZoomScale(zoomScale))
                 if count > 1 {
+                  if zoomLevel < 19 {
                     let coordinate = CLLocationCoordinate2D(
-                        latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(count),
-                        longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(count)
+                      latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(count),
+                      longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(count)
                     )
                     var cluster = FBAnnotationCluster()
                     cluster.coordinate = coordinate
                     cluster.annotations = annotations
-                                        
+                    
                     clusteredAnnotations.append(cluster)
+                  } else {
+                    clusteredAnnotations += annotations
+                  }
                 }
-
-                
-                
             }
            
         }
