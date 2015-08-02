@@ -94,21 +94,16 @@ class FBClusteringManager : NSObject {
                     clusteredAnnotations += annotations
                 }
               
-              let zoomLevel = FBClusteringManager.FBZoomScaleToZoomLevel(MKZoomScale(zoomScale))
                 if count > 1 {
-                  if zoomLevel < 19 {
-                    let coordinate = CLLocationCoordinate2D(
-                      latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(count),
-                      longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(count)
-                    )
-                    var cluster = FBAnnotationCluster()
-                    cluster.coordinate = coordinate
-                    cluster.annotations = annotations
+                  let coordinate = CLLocationCoordinate2D(
+                    latitude: CLLocationDegrees(totalLatitude)/CLLocationDegrees(count),
+                    longitude: CLLocationDegrees(totalLongitude)/CLLocationDegrees(count)
+                  )
+                  var cluster = FBAnnotationCluster()
+                  cluster.coordinate = coordinate
+                  cluster.annotations = annotations as! [FBAnnotation]
                     
-                    clusteredAnnotations.append(cluster)
-                  } else {
-                    clusteredAnnotations += annotations
-                  }
+                  clusteredAnnotations.append(cluster)
                 }
             }
            

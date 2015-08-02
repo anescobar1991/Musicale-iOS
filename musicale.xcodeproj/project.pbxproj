@@ -35,7 +35,6 @@
 		41E6A69B1B5B56D600270ED6 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A69A1B5B56D600270ED6 /* AppStrings.swift */; };
 		41E6A69D1B5CAA4E00270ED6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */; };
 		41E6A69F1B5CB18200270ED6 /* musicale_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 41E6A69E1B5CB18200270ED6 /* musicale_logo.png */; };
-		41E6A6A21B69C80F00270ED6 /* RandomNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6A6A11B69C80F00270ED6 /* RandomNumbers.swift */; };
 		C11DCE123A1C7B49C0B46DA0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AF77A095F4969E9302777FF /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -82,7 +81,6 @@
 		41E6A69A1B5B56D600270ED6 /* AppStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		41E6A69C1B5CAA4E00270ED6 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		41E6A69E1B5CB18200270ED6 /* musicale_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicale_logo.png; sourceTree = "<group>"; };
-		41E6A6A11B69C80F00270ED6 /* RandomNumbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumbers.swift; sourceTree = "<group>"; };
 		6164340EB15E8AE3096DE74E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8AF77A095F4969E9302777FF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77C911B42A4DB44A4E2DB2C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 		417090FA1AD9B89A0095A7BB /* musicale */ = {
 			isa = PBXGroup;
 			children = (
-				41E6A6A01B69C7F500270ED6 /* Utils */,
 				41E6A6991B5B4F1300270ED6 /* Resources */,
 				412CEB191B4CC12500CEE159 /* FBAnnotationClustering */,
 				41128A881B1FDBEA00366DFB /* API */,
@@ -244,14 +241,6 @@
 				41E6A69A1B5B56D600270ED6 /* AppStrings.swift */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		41E6A6A01B69C7F500270ED6 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				41E6A6A11B69C80F00270ED6 /* RandomNumbers.swift */,
-			);
-			name = Utils;
 			sourceTree = "<group>";
 		};
 		C49AD089B022FB1330C18F4F /* Frameworks */ = {
@@ -426,7 +415,6 @@
 				412CEB211B4CC18500CEE159 /* FBAnnotation.swift in Sources */,
 				41128A921B22A37800366DFB /* LocationChangeTableViewController.swift in Sources */,
 				412CEB1F1B4CC18000CEE159 /* FBAnnotationClusterView.swift in Sources */,
-				41E6A6A21B69C80F00270ED6 /* RandomNumbers.swift in Sources */,
 				412CEB1B1B4CC16300CEE159 /* FBClusteringManager.swift in Sources */,
 				412CEB161B49969900CEE159 /* Geocoder.swift in Sources */,
 				412CEB121B478D7600CEE159 /* EventsViewController.swift in Sources */,

@@ -7,8 +7,6 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
   private let clusteringManager = FBClusteringManager()
   private let dataManager = PersistentDataManager.sharedInstance
   
-  private var eventLocations = Set<FBAnnotation>()
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     mapView.delegate = self
@@ -33,16 +31,43 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
   
   func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
     var reuseId = ""
+    
     if annotation.isKindOfClass(FBAnnotationCluster) {
       reuseId = "Cluster"
+      var a = annotation as! FBAnnotationCluster
+      var venueNamesArray = Set<String>()
+      let events: [FBAnnotation] = a.annotations
+      
+      //create title for cluster based on venue names in cluster
+      for event in events {
+        let eventData = event.metaData as! Event
+        if !venueNamesArray.contains(eventData.venueName) {
+          venueNamesArray.insert(eventData.venueName)
+        }
+      }
+      //if cluster only contains one venue then set venue name as annotation title
+      if venueNamesArray.count == 1 {
+        let title = " ".join(venueNamesArray)
+        a.title = title
+      }
+
       var clusterView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-      clusterView = FBAnnotationClusterView(annotation: annotation, reuseIdentifier: reuseId)
+      clusterView = FBAnnotationClusterView(annotation: a, reuseIdentifier: reuseId)
+      
+      //will only display callout if there is only one venue within cluster
+      if venueNamesArray.count == 1 {
+        clusterView?.canShowCallout = true
+        clusterView?.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
+      }
+
       return clusterView
     } else {
       reuseId = "Pin"
       var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
       pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-
+      pinView?.canShowCallout = true
+      pinView?.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
+      
       return pinView
     }
   }
@@ -72,19 +97,9 @@ class EventsMapViewController: UIViewController, MKMapViewDelegate {
     for event in events {
       let pin = FBAnnotation()
       pin.coordinate = event.latLng
-      
-      //if pin's coordinates already exist on map (multiple events at same venue) then will place pin at slightly different location
-      if eventLocations.contains(pin) {
-        let lat = Double(pin.coordinate.latitude)
-        let lng = Double(pin.coordinate.longitude)
-        let newLat = lat * (Double.random() * (1.000001 - 0.9999999) + 0.9999999)
-        let newLng = lng * (Double.random() * (1.000001 - 0.9999999) + 0.9999999)
-        let newCoordinate = CLLocationCoordinate2D(latitude: newLat, longitude: newLng)
-        pin.coordinate = newCoordinate
-      }
-
-      //add pin's coordinates to variable that keeps track of all coordinates to be placed on map
-      eventLocations.insert(pin)
+      pin.metaData = event
+      pin.title = event.title
+      pin.subtitle = event.date
       pins.append(pin)
     }
     return pins

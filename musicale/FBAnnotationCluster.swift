@@ -16,12 +16,8 @@ class FBAnnotationCluster : NSObject {
     var title:String = "cluster"
     var subtitle:String? = nil
     
-    var annotations:[MKAnnotation] = []
+    var annotations:[FBAnnotation] = []
     
 }
 
-extension FBAnnotationCluster : MKAnnotation {
-    
-    
-    
-}
+extension FBAnnotationCluster : MKAnnotation {}

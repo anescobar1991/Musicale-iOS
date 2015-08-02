@@ -30,7 +30,7 @@ class MoreOptionsTableViewController: UITableViewController {
   }
   
   private func sanitizePlaceToDisplay(place: CLPlacemark) -> String {
-    var placeStringArray :[String] = []
+    var placeStringArray: [String] = []
     
     if let name = place.name { placeStringArray.append("\(name) -") }
     if let locality = place.locality { placeStringArray.append("\(locality),") }

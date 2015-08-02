@@ -12,25 +12,11 @@ import MapKit
 
 class FBAnnotation: NSObject {
     var coordinate = CLLocationCoordinate2D(latitude: 39.208407, longitude: -76.799555)
+    var title = ""
+    var subtitle = ""
+    var metaData: AnyObject?
 }
 
 extension FBAnnotation: MKAnnotation {
     
-}
-
-extension FBAnnotation: Hashable {
-  
-  override var hashValue: Int {
-    get {
-      return "\(coordinate.latitude),\(coordinate.longitude)".hashValue
-    }
-  }
-  
-}
-
-extension FBAnnotation: Equatable {
-}
-
-func ==(lhs: FBAnnotation, rhs: FBAnnotation) -> Bool {
-  return lhs.hashValue == rhs.hashValue
 }
